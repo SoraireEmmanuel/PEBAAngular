@@ -1,0 +1,84 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
+/*icons style*/
+.fa-2x {
+  font-size: 2em;
+}
+.fa {
+  position: relative;
+  display: table-cell;
+  width: 60px;
+  height: 36px;
+  text-align: center;
+  vertical-align: middle;
+  font-size:20px;
+}
+/*Menu style*/
+.main-menu{
+  /*Menu position*/
+  width: 100%;
+  top: 2%;
+}
+/*Title style*/
+.main-menu .nav-title{
+  /*Title position*/
+  position:relative;
+  display:table;
+  width:100%;
+  color:#666666;
+  /*Title style*/
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  }
+/*Option style*/
+.main-menu li>a {
+  position:relative;
+  display:table;
+  color:#666666;
+  font-family:'Titillium Web', sans-serif;
+  font-size: 14px;
+  cursor:pointer;
+  transition:all .3s linear;
+}
+/*Text option style*/
+.main-menu .nav-text {
+  position:relative;
+  display:table-cell;
+  vertical-align:middle;
+  width:80%;
+  font-family: 'Titillium Web', sans-serif;
+}
+/*Hover effect*/
+.main-menu li:hover>a{
+  color:#ffffff;
+  background-color:#4d4d4d;
+  font-size: 16px;
+
+  }
+/*Logout style*/
+.main-menu>ul.logout {
+position:absolute;
+left:0;
+bottom:0;
+}
+/*decoration link off*/
+a{
+  text-decoration: none;
+}
+a:hover,a:focus {
+  text-decoration:none;
+}
+/*option position*/
+nav ul,nav li {
+outline:0;
+margin:0;
+padding:0;
+}
+/*input style*/
+input{
+  width: 80%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

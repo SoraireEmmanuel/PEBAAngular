@@ -1,0 +1,109 @@
+<nav class="main-menu">
+  <!--
+    *********************************************************************
+                      Options when you are logged in
+    *********************************************************************
+    -->
+  <div *ngIf="!menuView">
+    <ul>
+      <li>
+        <a routerLink="misPacientes">
+          <i class="fa fa-home fa-2x"></i>
+          <span class="nav-text">
+            Mis Pacientes
+          </span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="registrarNuevoPaciente">
+          <i class="fa fa-user-injured fa-2x"></i>
+          <span class="nav-text">
+            Registrar Nuevo Paciente
+          </span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="protocolo">
+          <i class="fa fa-chalkboard-teacher fa-2x"></i>
+          <span class="nav-text">
+            Nueva Protocolo
+          </span>
+        </a>
+      </li>
+      <li class="has-subnav">
+        <a routerLink="histrial">
+          <i class="fa fa-folder-open fa-2x"></i>
+          <span class="nav-text">
+            Historial
+          </span>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+  <!--
+      *********************************************************************
+                                Loguin
+      *********************************************************************
+    -->
+  <div *ngIf="menuView">
+    <form>
+      <!--Title-->
+      <span class="nav-title">
+        Login PEBA
+      </span>
+      <div class="text-center">
+        <input type="text" placeholder="Usuario" name="usuario" [(ngModel)]="usuariologin.Matricula">
+        <input type="password" placeholder="Contraseña" name="password" [(ngModel)]="usuariologin.PasswordCuenta">
+      </div>
+      <ul>
+        <li>
+          <a (click)="login()">
+            <i class="fa fa-user fa-2x"></i>
+            <span class="nav-text">
+              Iniciar Sesion
+            </span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="registrarUsuario">
+            <i class="fa fa-plus fa-2x"></i>
+            <span class="nav-text">
+              Registro del profesional
+            </span>
+          </a>
+        </li>
+        <!--
+                    *********************************************************************
+                                    Out Scope
+                    *********************************************************************
+                  <li>
+                    <a routerLink="register">
+                          <i class="fa fa-share fa-2x"></i>
+                          <span class="nav-text">
+                            Recuperar Contraseña
+                          </span>
+                      </a>
+                  </li>
+                  -->
+      </ul>
+    </form>
+  </div>
+
+  <!--
+    *********************************************************************
+                          Logout
+    *********************************************************************
+  -->
+  <ul class="logout" *ngIf="!menuView">
+    <li>
+      <a (click)="logout()">
+        <i class="fa fa-power-off fa-2x"></i>
+        <span class="nav-text">
+          Cerrar Sesion
+        </span>
+      </a>
+    </li>
+
+  </ul>
+</nav>

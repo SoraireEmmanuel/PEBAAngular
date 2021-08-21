@@ -1,0 +1,23 @@
+.side-bar{
+    /*menu position in the application*/
+    position: fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    height:100%;
+    width:20%;
+    /*Other style of menu*/
+    background:#000000;
+  }
+
+  
+.contenido{
+    /*content position in the application*/
+    position: absolute;
+    top:0;
+    left:20%;
+    width:80%;
+    /*Other style of menu*/
+    background:#ffffff;
+    }
+  

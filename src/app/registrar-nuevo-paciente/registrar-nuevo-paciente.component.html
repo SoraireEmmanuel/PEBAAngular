@@ -1,0 +1,41 @@
+<div class="contentContainer">
+  <form class="row g-3 needs-validation" autocomplete="off" [formGroup]="forma" (ngSubmit)="crearPaciente()">
+    <h2>Ingresar Paciente Nuevo</h2>
+    <hr>
+    <div class="col-md-6">
+      <label for="validationCustom01" class="form-label">Iniciales del Paciente</label>
+      <input class="form-control" type="text" placeholder="Ej: MES" name='iniciales' formControlName='iniciales' style="text-transform:uppercase;">
+    </div>
+    <div class="col-md-6">
+      <label for="validationCustom01" class="form-label">Fecha de Nacimiento</label><br>
+      <input class="form-control" type="date" name="nacimiento" formControlName='nacimiento'>
+    </div>
+    <div class="col-md-4">
+      <label for="validationCustom01" class="form-label">Lengua Materna: </label><br>
+      <select class=" form-select" name="idioma" formControlName='lengua'>
+        <option *ngFor="let leng of lengua" [value]=leng>{{leng}}</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="validationCustom01" class="form-label">Dominancia Manual: </label><br>
+      <select class="form-select" name="dominancia" formControlName='dominancia'>
+        <option *ngFor="let dom of dominancia" [value]=dom>{{dom}}</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="validationCustom01" class="form-label">Estudios: </label> <br>
+      <select class="form-select" name="estudios" formControlName='estudios'>
+        <option *ngFor="let est of estudios" [value]=est>{{est}}</option>
+      </select>
+    </div>
+    <div class="col-12" style="text-align: center;">
+      <button type="submit" class="btn btnForm">Registrar Paciente</button>
+    </div>
+  </form>
+  <pre>
+    estado del formulario 
+    {{forma.valid}} y {{forma.status}}
+    <br>
+    {{forma.value|json}}
+  </pre>
+</div>

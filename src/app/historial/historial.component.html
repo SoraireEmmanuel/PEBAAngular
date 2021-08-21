@@ -1,0 +1,84 @@
+<div class="contentContainer">
+  <form class="row g-3 needs-validation" autocomplete="off" [formGroup]="forma" (ngSubmit)="verHistorial()">
+    <h2>Buscar Protocolo</h2>
+    <hr>
+    <div class="col-md-3">
+      <div class="form-floating">
+        <select class="form-select" name="filtro" id="f" formControlName="filtro" (click)="limpiar()">
+          <option *ngFor="let fil of filtros" [value]=fil>{{fil}}</option>
+        </select>
+        <label for="validationCustom01" >Filtar por </label>
+      </div>
+    </div>
+
+    <div class="col-md-6 row g-2 needs-validation" *ngIf="validarFiltro3()">
+      <div class="col-md-6 form-floating" *ngIf="validarFiltro2()">
+        
+        <input type="date" class="form-control" id="desde" name="desde" formControlName="desde">
+        <label for="desde" >Desde:</label>
+      </div>
+      <div class="col-md-6 form-floating" *ngIf="validarFiltro2()">
+
+        <input type="date" class="form-control" id="hasta" name="hasta" formControlName="hasta">
+        <label for="hasta" class="form-label">Hasta:</label>
+      </div>
+
+      <div class="col-md-12 form-floating" *ngIf="validarFiltro()">
+        <input type="text" class="form-control" id="idusuario" name="idusuario" formControlName="idusuario"
+          placeholder="Ej: MES010289">
+          <label for="idusuario" >Id Paciente</label>
+      </div>
+      <div class="alert alert-danger pt-1 pb-1" *ngIf="validacionFecha">
+        *Se debe ingresar un intervalo de fecha valido.
+      </div>
+      <div class="alert alert-danger pt-1 pb-1" *ngIf="validacionPorId">
+        *Se debe ingresar el id de un paciente.
+      </div>
+    </div>
+
+    <div class="col-md-3 form-floating ">
+      <button class="btn mt-0 " style="height: max-content; padding-top: 16px;padding-bottom: 16px;" type="submit"> Aplicar</button>
+    </div>
+  </form>
+  <pre>
+  estado del formulario 
+  {{forma.valid}} y {{forma.status}}
+  <br>
+  {{forma.value|json}}
+  <br>
+  {{validacionFecha}}
+
+</pre>
+  <br>
+
+  <!--
+  *******************************************************************************
+                      Table Example
+  ********************************************************************************
+  -->
+  <table class="table table-bordered tabl-striped table-light" style="width: 100%;">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col" style="width: 5%;">Id Paciente</th>
+        <th scope="col" style="width: 5%;">Fecha</th>
+        <th scope="col" style="width: 5%;">Resultado</th>
+        <th scope="col" style="width: 30%;">Accion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">mes01021989</th>
+        <td>21/05/2021</td>
+        <td>10/36</td>
+        <td>
+          <div>
+            <button class="btn btnTable">Descargar Informe</button>
+            <button class="btn btnTable">Ver Informe</button>
+          </div>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+</div>

@@ -1,0 +1,2116 @@
+<!--
+*****************************************************
+             Template 1 - Registrar datos del paciente
+*****************************************************
+ -->
+<form class="row g-3 needs-validation" autocomplete="off" [formGroup]="forma" (ngSubmit)="nextTemplate()">
+  <div class="contentContainer" *ngIf="template==0">
+    <h2>Nuevo Protocolo - Identificacion del Paciente</h2>
+    <h6 style="text-align: left;">Datos del Paciente</h6>
+    <hr>
+    <div class="subcontent row">
+      <div class="col-md-8">
+        <div class="col-md-6 ">
+          <label for="validationCustom01" class="form-label">Seleccione un paciente registrado </label>
+          <select (click)="seleccionarPaciente()" class="form-select" name="mispacientes" formControlName='indice'>
+            <option *ngFor="let pac of mispacientes;let indice=index" [value]=indice>{{pac.idUsuario}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label"> Fecha </label>{{forma.value.fechaProtocolo| date: "dd/MM/yyyy"}}
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-3">
+          <label for="validationCustom01" class="form-label"> Fecha de Nacimiento </label>
+          {{forma.value.nacimiento}}
+        </div>
+        <div class="col-md-3">
+          <label for="validationCustom01" class="form-label"> Escolaridad</label>
+          {{forma.value.escolaridad}}
+        </div>
+        <div class="col-md-3">
+          <label for="validationCustom01" class="form-label"> Lengua Materna </label>
+          {{forma.value.lengua}}
+        </div>
+        <div class="col-md-3">
+          <label for="validationCustom01" class="form-label"> Dominancia Manual</label>
+          {{forma.value.dominancia}}
+        </div>
+      </div>
+    </div>
+    <br>
+    <div>
+      <div class="subcontent mt-5">
+        <div class="form-floating">
+          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"
+            name="resumenclinico" formControlName="resumenclinico"></textarea>
+          <label for="floatingTextarea2">Resumen Clinico</label>
+        </div>
+        {{forma.value.resumenclinico}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+      </div>
+      <div class="col-md-6" style="text-align: right;">
+        <button class="btnForm" (click)="nextTemplate()">Siguiente</button>
+      </div>
+    </div>
+  </div>
+  <!--
+  *****************************************************
+               Template 2 - Sintomas Neurologicos
+  *****************************************************
+   -->
+  <div class="contentContainer" *ngIf="template==1">
+    <h2>Nuevo Protocolo - Síntomas Neurológicos Actuales</h2>
+    <hr>
+    <!--Alerta-->
+    <div class="row mt-2">
+      <div class="col-md-2 ">
+        <h5>Alerta:</h5>
+      </div>
+      <div class="col-md-2">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="alterado" name="alerta" value="CONSERVADO"
+            formControlName="alerta">
+          <label class="form-check-label" for="alterado">Conservado</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="alterado2" name="alerta" value="ALTERADO"
+            formControlName="alerta">
+          <label class="form-check-label" for="alterado2">Alterado</label>
+        </div>
+      </div>
+      <div *ngIf="forma.value.alerta=='ALTERADO'" class="col-md-5 form-floating">
+        <select class="form-select" id="alertaopcion" name="alertaopcion" formControlName='alertaOpcion'
+          aria-label="Floating label select example">
+          <option *ngFor="let ale of alertaOpciones" [value]=ale>{{ale}}</option>
+        </select>
+        <label for="floatingSelect">Tipo de alteracion</label>
+      </div>
+      <div *ngIf="forma.value.alerta=='ALTERADO'&&forma.value.alertaOpcion=='Otro'" class="col-md-3 form-floating">
+        <input type="text" class="form-control" id="alertaopcion2" formControlName="alertaOpcionOtro">
+        <label for="alertaopcion2">Cual?</label>
+      </div>
+    </div>
+    <hr class="mt-2">
+    <!--Estado emocional-->
+    <div class="row mt-2">
+      <div class="col-md-2">
+        <h5>Estado emocional:</h5>
+      </div>
+      <div class="col-md-2">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="estadoemocional" name="estadoemocional" value="CONSERVADO"
+            formControlName="estadoemocional">
+          <label class="form-check-label" for="estadoemocional">Conservado</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="estadoemocional2" name="estadoemocional" value="ALTERADO"
+            formControlName="estadoemocional">
+          <label class="form-check-label" for="estadoemocional2">Alterado</label>
+        </div>
+      </div>
+      <div *ngIf="forma.value.estadoemocional=='ALTERADO'" class="col-md-5 form-floating">
+        <select class="form-select" name="estadoemocionalOpcion" id="estadoemocionalopcion"
+          formControlName="estadoemocionalOpcion">
+          <option *ngFor="let emocional of estadoEmocionalOpciones" [value]=emocional>{{emocional}}</option>
+        </select>
+        <label for="estadoemocionalopcion">Tipo de alteracion</label>
+      </div>
+      <div *ngIf="forma.value.estadoemocional=='ALTERADO'&&forma.value.estadoemocionalOpcion=='Otro'"
+        class="col-md-3 form-floating">
+        <input type="text" class="form-control" id="estadoemocionalopcion2" name='estadoemocionalOpcionOtro'
+          formControlName="estadoemocionalOpcionOtro">
+        <label for="estadoemocionalopcion2">Cual?</label>
+      </div>
+    </div>
+    <hr class="mt-2">
+    <!--Fuerza-->
+    <div class="row mt-2">
+      <div class="col-md-2">
+        <h5>Fuerza:</h5>
+      </div>
+      <div class="col-md-2">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="fuerza" name="fuerza" value="CONSERVADO"
+            formControlName="fuerza">
+          <label class="form-check-label" for="fuerza">Conservado</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="fuerza2" name="fuerza" value="ALTERADO"
+            formControlName="fuerza">
+          <label class="form-check-label" for="fuerza2">Alterado</label>
+        </div>
+      </div>
+      <div *ngIf="forma.value.fuerza=='ALTERADO' " class="col-md-5 form-floating">
+        <select class="form-select" name="fuerzaOpcion" id="fuerzaopcion" formControlName="fuerzaOpcion">
+          <option *ngFor="let fuer of fuerzaOpciones" [value]=fuer>{{fuer}}</option>
+        </select>
+        <label for="fuerzaopcion">Tipo de alteracion</label>
+      </div>
+      <div *ngIf="forma.value.fuerza=='ALTERADO' && forma.value.fuerzaOpcion=='Otro'" class="col-md-3 form-floating">
+        <input type="text" class="form-control" id="fuerzaopcion2" name="fuerzaOpcionOtro"
+          formControlName="fuerzaOpcionOtro">
+        <label for="fuerzaopcion2">Cual?</label>
+      </div>
+    </div>
+    <hr class="mt-2">
+    <!--Coordinacion Motora-->
+    <div class="row mt-2">
+      <div class="col-md-2">
+        <h5>Coordinación motora:</h5>
+      </div>
+      <div class="col-md-2">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="coordinacionc" name="coordinacionmotora" value="CONSERVADO"
+            formControlName="coordinacionmotora">
+          <label class="form-check-label" for="coordinacionc">Conservado</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="coordinacionc2" name="coordinacionmotora" value="ALTERADO"
+            formControlName="coordinacionmotora">
+          <label class="form-check-label" for="coordinacionc2">Alterado</label>
+        </div>
+      </div>
+      <div *ngIf="forma.value.coordinacionmotora=='ALTERADO'" class="col-md-5 form-floating">
+        <select class="form-select" name="coordinacionmotoraOpcion" id="coordinacioncopcion"
+          formControlName="coordinacionmotoraOpcion">
+          <option *ngFor="let coord of coordinacioncOpciones" [value]=coord>{{coord}}</option>
+        </select>
+        <label for="fuerzaopcion">Tipo de alteracion</label>
+      </div>
+      <div *ngIf="forma.value.coordinacionmotora=='ALTERADO'&& forma.value.coordinacionmotoraOpcion=='Otro'"
+        class="col-md-3 form-floating">
+        <input type="text" class="form-control" id="coordinacioncopcion2" name="coordinacionmotoraOpcionOtro"
+          formControlName="coordinacionmotoraOpcionOtro">
+        <label for="coordinacioncopcion2">Cual?</label>
+      </div>
+    </div>
+    <hr class="mt-2">
+    <!--Sensibilidad-->
+    <div class="row mt-2">
+      <div class="col-md-2">
+        <h5>Sensibilidad:</h5>
+      </div>
+      <div class="col-md-2">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="sensibilidad" name="sensibilidad" value="CONSERVADO"
+            formControlName="sensibilidad">
+          <label class="form-check-label" for="sensibilidad">Conservado</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="sensibilidad2" name="sensibilidad" value="ALTERADO"
+            formControlName="sensibilidad">
+          <label class="form-check-label" for="sensibilidad2">Alterado</label>
+        </div>
+      </div>
+      <div *ngIf="forma.value.sensibilidad=='ALTERADO'" class="col-md-5 form-floating">
+        <select class="form-select" name="sensibilidadOpcion" id="sensibilidadopcion"
+          formControlName="sensibilidadOpcion">
+          <option *ngFor="let coord of coordinacioncOpciones" [value]=coord>{{coord}}</option>
+        </select>
+        <label for="fuerzaopcion">Tipo de alteracion</label>
+      </div>
+      <div *ngIf="forma.value.sensibilidad=='ALTERADO'&&forma.value.sensibilidadOpcion=='Otro'"
+        class="col-md-3 form-floating">
+        <input type="text" class="form-control" id="sensibilidadopcion2" name="sensibilidadOpcionOtro"
+          formControlName="sensibilidadOpcionOtro">
+        <label for="sensibilidadopcion2">Cual?</label>
+      </div>
+    </div>
+    <hr class="mt-2">
+
+
+    <!--Vision-->
+    <div class="row mt-2">
+      <div class="col-md-2">
+        <h5>Visión:</h5>
+      </div>
+      <div class="col-md-2">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="vision" name="vision" value="CONSERVADO"
+            formControlName="vision">
+          <label class="form-check-label" for="vision">Conservado</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="vision2" name="vision" value="ALTERADO"
+            formControlName="vision">
+          <label class="form-check-label" for="vision2">Alterado</label>
+        </div>
+      </div>
+      <div *ngIf="forma.value.vision=='ALTERADO'" class="col-md-5 form-floating">
+        <select class="form-select" name="visionOpcion" id="visionopcion" formControlName="visionOpcion">
+          <option *ngFor="let vis of visionOpciones" [value]=vis>{{vis}}</option>
+        </select>
+        <label for="visionopcion">Tipo de alteracion</label>
+      </div>
+      <div *ngIf="forma.value.vision=='ALTERADO'&&forma.value.visionOpcion=='Otro'" class="col-md-3 form-floating">
+        <input type="text" class="form-control" id="visionopcion2" name="visionOpcionOtro"
+          formControlName="visionOpcionOtro">
+        <label for="visionopcion2">Cual?</label>
+      </div>
+    </div>
+    <hr class="mt-2">
+    <!--Audicion-->
+    <div class="row mt-2">
+      <div class="col-md-2">
+        <h5>Audición:</h5>
+      </div>
+      <div class="col-md-2">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="audicion" name="audicion" value="CONSERVADO"
+            formControlName="audicion">
+          <label class="form-check-label" for="audicion">Conservado</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="audicion2" name="audicion" value="ALTERADO"
+            formControlName="audicion">
+          <label class="form-check-label" for="audicion2">Alterado</label>
+        </div>
+      </div>
+      <div *ngIf="forma.value.audicion=='ALTERADO'" class="col-md-5 form-floating">
+        <select class="form-select" name="audicionOpcion" id="audicionopcion" formControlName="audicionOpcion">
+          <option *ngFor="let aud of audicionOpciones" [value]=aud>{{aud}}</option>
+        </select>
+        <label for="audicionopcion">Tipo de alteracion</label>
+      </div>
+      <!--
+      <div class="col-md-3 form-floating" >
+        <input type="text" class="form-control" id="audicionopcion2">
+        <label for="audicionopcion2">Cual?</label>
+      </div>-->
+    </div>
+    <hr class="mt-2">
+
+    <!--Atención espacial-->
+    <div class="row mt-2">
+      <div class="col-md-2">
+        <h5>Atención espacial:</h5>
+      </div>
+      <div class="col-md-2">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="atencionespacial" name="atencionespacial" value="CONSERVADO"
+            formControlName="atencionespacial">
+          <label class="form-check-label" for="atencionespacial">Conservado</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="atencionespacial2" name="atencionespacial" value="ALTERADO"
+            formControlName="atencionespacial">
+          <label class="form-check-label" for="atencionespacial2">Alterado</label>
+        </div>
+      </div>
+      <div *ngIf="forma.value.atencionespacial=='ALTERADO'" class="col-md-5 form-floating">
+        <select class="form-select" name="atencionespacialOpcion" id="atencionespacialOpcion"
+          formControlName="atencionespacialOpcion">
+          <option *ngFor="let ae of atencionespacialOpciones" [value]=ae>{{ae}}</option>
+        </select>
+        <label for="atencionespacialopcion">Tipo de alteracion</label>
+      </div>
+      <!--
+          <div class="col-md-3 form-floating" >
+            <input type="text" class="form-control" id="audicionopcion2">
+            <label for="audicionopcion2">Cual?</label>
+          </div>-->
+    </div>
+    <hr class="mt-2">
+    <!--Praxia manual-->
+    <div class="row mt-2">
+      <div class="col-md-2">
+        <h5>Praxia manual:</h5>
+      </div>
+      <div class="col-md-2">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="praxiamanual" name="praxiaManual" value="CONSERVADO"
+            formControlName="praxiaManual">
+          <label class="form-check-label" for="praxiamanual">Conservado</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="praxiamanual2" name="praxiaManual" value="ALTERADO"
+            formControlName="praxiaManual">
+          <label class="form-check-label" for="praxiamanual2">Alterado</label>
+        </div>
+      </div>
+      <div *ngIf="forma.value.praxiaManual=='ALTERADO'" class="col-md-5 form-floating">
+        <select class="form-select" name="praxiaManualOpcion" id="praxiamanualopcion"
+          formControlName="praxiaManualOpcion">
+          <option *ngFor="let pm of praxiamanualOpciones" [value]=pm>{{pm}}</option>
+        </select>
+        <label for="praxiamanualopcion">Tipo de alteracion</label>
+      </div>
+      <!--
+        <div class="col-md-3 form-floating" >
+          <input type="text" class="form-control" id="audicionopcion2">
+          <label for="audicionopcion2">Cual?</label>
+        </div>-->
+    </div>
+    <hr class="mt-2">
+    <!--Praxia orolinguofaciales-->
+    <div class="row mt-2">
+      <div class="col-md-2">
+        <h5>Praxia orolinguofaciales:</h5>
+      </div>
+      <div class="col-md-2">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="praxiaorolinguofaciales" name="praxiaOrolinguofaciales"
+            value="CONSERVADO" formControlName="praxiaOrolinguofaciales">
+          <label class="form-check-label" for="praxiaorolinguofaciales">Conservado</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="praxiaorolinguofaciales2" name="praxiaOrolinguofaciales"
+            value="ALTERADO" formControlName="praxiaOrolinguofaciales">
+          <label class="form-check-label" for="praxiaorolinguofaciales2">Alterado</label>
+        </div>
+      </div>
+      <!--
+        <div class="col-md-5 form-floating">
+          <select class="form-select" name="praxiamanualopcion" id="praxiamanualopcion" formControlName="praxiamanualOpciones">
+            <option *ngFor="let pm of praxiamanualOpciones" [value]=pm>{{pm}}</option>
+          </select>
+          <label for="praxiamanualopcion">Tipo de alteracion</label>
+        </div>
+        
+        <div class="col-md-3 form-floating" >
+          <input type="text" class="form-control" id="audicionopcion2">
+          <label for="audicionopcion2">Cual?</label>
+        </div>-->
+    </div>
+    <hr class="mt-2">
+    <!--Deglución-->
+    <div class="row mt-2">
+      <div class="col-md-2">
+        <h5>Deglución:</h5>
+      </div>
+      <div class="col-md-2">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="deglución" name="deglucion" value="CONSERVADO"
+            formControlName="deglucion">
+          <label class="form-check-label" for="deglución">Conservado</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="deglucion2" name="deglucion" value="ALTERADO"
+            formControlName="deglucion">
+          <label class="form-check-label" for="deglucion2">Alterado</label>
+        </div>
+      </div>
+      <div *ngIf="forma.value.deglucion=='ALTERADO'" class="col-md-5 form-floating">
+        <select class="form-select" name="deglucionOpcion" id="deglucionopcion" formControlName="deglucionOpcion">
+          <option *ngFor="let deg of deglucionOpciones" [value]=deg>{{deg}}</option>
+        </select>
+        <label for="deglucionopcion">Tipo de alteracion</label>
+      </div>
+      <!--
+        <div class="col-md-3 form-floating" >
+          <input type="text" class="form-control" id="audicionopcion2">
+          <label for="audicionopcion2">Cual?</label>
+        </div>-->
+    </div>
+    <hr class="mt-2">
+    <div class="row">
+      <div class="col-md-6">
+        <button class="btnForm " (click)="backTemplate()">Anterior</button>
+      </div>
+      <div class="col-md-6" style="text-align: right;">
+        <button class="btnForm " (click)="nextTemplate()">Siguiente</button>
+      </div>
+    </div>
+  </div>
+
+  <!--
+  *****************************************************
+               Template 3
+  *****************************************************
+   -->
+  <div class="contentContainer " *ngIf="template==2" style="background-color: rgb(238, 210, 132);">
+    <h2>Evaluacion del Lenguaje - Comprensión Auditiva</h2>
+    <hr>
+    <!--Emaprejamiento palabra oida-dibujo-->
+    <div class="mt-3">
+      <h6 style="text-align: left;">Emparejamiento palabra oída-dibujo</h6>
+      <div class="row">
+        <div class="col-md-6 mt-3">
+          <h5> Señale la OVEJA (lámina: oreja, plancha, oveja, vaca): </h5>
+        </div>
+        <div class="col-md-4 form-floating">
+          <select (click)="sumapaso1()" class="form-select" name="p1p1" id="p1p1" formControlName="p1p1">
+            <option *ngFor="let p1 of p1p1" [value]=p1.valor>{{p1.etiqueta}}</option>
+          </select>
+          <label for="p1p1">Respuesta</label>
+        </div>
+        <div class="col-md-2 mt-3">
+          <span>Puntuacion:{{forma.value.p1p1}}</span>
+        </div>
+      </div>
+    </div>
+    <!--Comandos Oidos-->
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Señale el PLATO (lámina: vaso, plato, revólver, pato): </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)="sumapaso1()" class="form-select" name="p1p2" id="p1p2" formControlName="p1p2">
+          <option *ngFor="let p2 of p1p1" [value]=p2.valor>{{p2.etiqueta}}</option>
+        </select>
+        <label for="p1p2">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion: {{forma.value.p1p2}}</span>
+      </div>
+    </div>
+    <hr class="mt-2">
+    <div class="mt-3">
+      <h6 style="text-align: left;">Comandos oidos</h6>
+      <div class="row">
+        <div class="col-md-6 mt-3">
+          <h5>Tóquese la oreja: </h5>
+        </div>
+        <div class="col-md-4 form-floating">
+          <select (click)="sumapaso1()" class="form-select" name="p1p3" id="p1p3" formControlName="p1p3">
+            <option *ngFor="let p3 of p1p1" [value]=p3.valor>{{p3.etiqueta}}</option>
+          </select>
+          <label for="p1p3">Respuesta</label>
+        </div>
+        <div class="col-md-2 mt-3 ">
+          <span>Puntuacion: {{forma.value.p1p3}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Señale el techo y luego mueva su cabeza: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)="sumapaso1()" class="form-select" name="p1p4" id="p1p4" formControlName="p1p4">
+          <option *ngFor="let p4 of p1p2" [value]=p4.valor>{{p4.etiqueta}}</option>
+        </select>
+        <label for="p1p4">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion: {{forma.value.p1p4}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Señale la puerta, abra la boca y luego cierre los ojos: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)="sumapaso1()" class="form-select" name="p1p5" id="p1p5" formControlName="p1p5">
+          <option *ngFor="let p5 of p1p3" [value]=p5.valor>{{p5.etiqueta}}</option>
+        </select>
+        <label for="p1p5">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion: {{forma.value.p1p5}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+      </div>
+      <div class="col-md-4 form-floating">
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Total: {{tp1}}</span>
+      </div>
+    </div>
+    <hr class="mt-3" style="height: 2px;border:none; background-color: black; color: black;">
+    <!--Observaciones cualitativas-->
+    <h6 class="mt-3" style="text-align: left;">Observaciones cualitativas en comprensión auditiva</h6>
+    <div class="mt-3 row" style="background-color: rgb(153, 111, 95,0.1);">
+      <div class="col-md-2">
+        <h5> Emparejamiento: </h5>
+      </div>
+      <div class="col-md-4 form-check">
+        <input class="form-check-input" type="checkbox" value="Errores Formales" id="p1c1o1" name="p1c1o1"
+          formControlName="p1c1o1">
+        <label class="form-check-label" for="p1c1o1">
+          Errores Formales
+        </label>
+      </div>
+      <div class="col-md-3 form-check">
+        <input class="form-check-input" type="checkbox" value="Errores Semanticos" id="p1c1o2" name="p1c1o2"
+          formControlName="p1c1o2">
+        <label class="form-check-label" for="p1c1o2">
+          Errores Semanticos
+        </label>
+      </div>
+      <div class="col-md-3 form-check">
+        <input class="form-check-input" type="checkbox" value="Errores No Relacionados" id="p1c1o3" name="p1c1o3"
+          formControlName="p1c1o3">
+        <label class="form-check-label" for="p1c1o3">
+          Errores No Relacionados
+        </label>
+      </div>
+    </div>
+    <div class="row mt-1 " style="background-color: rgb(153, 111, 95,0.1);">
+      <div class="col-md-2">
+        <h5>Comandos Oidos:</h5>
+      </div>
+      <div class="col-md-4 form-check">
+        <input class="form-check-input" type="checkbox" value="Omision/sustitucion de partes" id="p1c2o1" name="p1c2o1"
+          formControlName="p1c2o1">
+        <label class="form-check-label" for="p1c2o1">
+          Omision/sustitucion de partes
+        </label>
+      </div>
+      <div class="col-md-3 form-check">
+        <input class="form-check-input" type="checkbox" value=" Alteracion del orden" id="p1c2o2" name="p1c2o2"
+          formControlName="p1c2o2">
+        <label class="form-check-label" for="p1c2o2">
+          Alteracion del orden
+        </label>
+      </div>
+      <div class="col-md-3">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <button class="btnForm " (click)="backTemplate()">Anterior</button>
+      </div>
+      <div class="col-md-6" style="text-align: right;">
+        <button class=" btnForm" (click)="nextTemplate()">Siguiente</button>
+      </div>
+    </div>
+  </div>
+
+  <!--
+  *****************************************************
+               Template 4
+  *****************************************************
+   -->
+  <div class="contentContainer " *ngIf="template==3" style="background-color: rgb(238, 210, 132);">
+    <div>
+      <h2>Evaluacion del Lenguaje - Expresion Oral (habla incluida)</h2>
+      <hr>
+      <div class="row mt-3">
+        <div class="mt-3 col-md-6">
+          <h5>Diga su nombre completo: </h5>
+        </div>
+        <div class="col-md-4 form-floating">
+          <select (click)="sumapaso2()" class="form-select" name="p2p1" id="p2p1" formControlName="p2p1">
+            <option *ngFor="let p of p2p1" [value]=p.valor>{{p.etiqueta}}</option>
+          </select>
+          <label for="p2p1">Respuesta</label>
+        </div>
+        <div class="col-md-2 mt-3">
+          <span>Puntuacion: {{forma.value.p2p1}}</span>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="mt-3 col-md-6">
+          <h5>¿En que ciudad nacio? </h5>
+        </div>
+        <div class="col-md-4 form-floating">
+          <select (click)="sumapaso2()" class="form-select" name="p2p2" id="p2p2" formControlName="p2p2">
+            <option *ngFor="let p of p2p1" [value]=p.valor>{{p.etiqueta}}</option>
+          </select>
+          <label for="p2p2">Respuesta</label>
+        </div>
+        <div class="col-md-2 mt-3">
+          <span>Puntuacion: {{forma.value.p2p2}}</span>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="mt-3 col-md-6">
+          <h5>Diga que ve en la lamina (lamina: "El Parque") </h5>
+        </div>
+        <div class="col-md-4 form-floating">
+          <select (click)="sumapaso2()" class="form-select" name="p2p3" id="p2p3" formControlName="p2p3">
+            <option *ngFor="let p of p2p2" [value]=p.valor>{{p.etiqueta}}</option>
+          </select>
+          <label for="p2p3">Respuesta</label>
+        </div>
+        <div class="col-md-2 mt-3">
+          <span>Puntuacion: {{forma.value.p2p3}}</span>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="mt-3 col-md-6">
+          <h5>Diga que ve en la lamina (lamina: "Consulta Medica") </h5>
+        </div>
+        <div class="col-md-4 form-floating">
+          <select (click)="sumapaso2()" class="form-select" name="p2p4" id="p2p4" formControlName="p2p4">
+            <option *ngFor="let p of p2p2" [value]=p.valor>{{p.etiqueta}}</option>
+          </select>
+          <label for="p2p4">Respuesta</label>
+        </div>
+        <div class="col-md-2 mt-3">
+          <span>Puntuacion: {{forma.value.p2p4}}</span>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="mt-3 col-md-6">
+        </div>
+        <div class="col-md-4 form-floating">
+        </div>
+        <div class="col-md-2 mt-3">
+          <span>Total: {{tp2}}</span>
+        </div>
+      </div>
+      <!--Observaciones cualitativas en expresion oral -->
+      <hr class="mt-3" style="height: 2px;border:none; background-color: black; color: black;">
+      <h6 class="mt-3" style="text-align: left;">Observaciones cualitativas en expresion oral</h6>
+      <div class="row mt-1 " style="background-color: rgb(153, 111, 95,0.1);">
+        <div class="col-md-3">
+          <h5>Fluencia (palabra/tiempo):</h5>
+        </div>
+        <div class="col-md-3  ">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="p2c1o1" name="p2c1o1" formControlName="p2c1o1">
+            <label class="form-check-label" for="p2c1o1">
+              Normal
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3 ">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="p2c1o2" name="p2c1o2" formControlName="p2c1o2">
+            <label class="form-check-label" for="p2c1o2">
+              Aumentada (logorrea)
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3 ">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="p2c1o3" name="p2c1o3" formControlName="p2c1o3">
+            <label class="form-check-label" for="p2c1o3">
+              Disminuida (no fluente)
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-1 " style="background-color: rgb(153, 111, 95,0.1);">
+        <div class="col-md-3 ">
+          <h5>Articulacion:</h5>
+        </div>
+        <div class="col-md-3 ">
+          <div class="form-check">
+            <input type="radio" class="form-check-input" value="Normal" id="p2c2o1" name="p2c2o1"
+              formControlName="p2c2o1">
+            <label class="form-check-label" for="p2c2o1">Normal
+            </label>
+          </div>
+          <div class="form-check">
+            <input type="radio" class="form-check-input" value="Alterado" id="p2c2o2" name="p2c2o1"
+              formControlName="p2c2o1">
+            <label class="form-check-label" for="p2c2o2">Alterada
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3 ">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="p2c2o2c1" name="p2c2o2c1"
+              formControlName="p2c2o2c1">
+            <label class="form-check-label" for="p2c2o2c1">
+              Disprosodia
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="p2c2o2c2" name="p2c2o2c2"
+              formControlName="p2c2o2c2">
+            <label class="form-check-label" for="p2c2o2c2">
+              Anomia
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="p2c2o2c3" name="p2c2o2c3"
+              formControlName="p2c2o2c3">
+            <label class="form-check-label" for="p2c2o2c3">
+              Expresiones Sustitutivas
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3 ">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="p2c2o2c4" name="p2c2o2c4"
+              formControlName="p2c2o2c4">
+            <label class="form-check-label" for="p2c2o2c4">
+              Muletillas
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="p2c2o2c5" name="p2c2o2c5"
+              formControlName="p2c2o2c5">
+            <label class="form-check-label" for="p2c2o2c5">
+              Neologismos
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="p2c2o2c6" name="p2c2o2c6"
+              formControlName="p2c2o2c6">
+            <label class="form-check-label" for="p2c2o2c6">
+              Estereotipias
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-1 " style="background-color: rgb(153, 111, 95,0.1);">
+        <div class="col-md-3">
+          <h5>Parafasias:</h5>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="p2c3o1" name="p2c3o1" formControlName="p2c3o1">
+            <label class="form-check-label" for="p2c3o1">
+              Formales
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="p2c3o2" name="p2c3o2" formControlName="p2c3o2">
+            <label class="form-check-label" for="p2c3o2">
+              Morfologicas
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="p2c3o3" name="p2c3o3" formControlName="p2c3o3">
+            <label class="form-check-label" for="p2c3o3">
+              Semanticas
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="p2c3o4" name="p2c3o4" formControlName="p2c3o4">
+            <label class="form-check-label" for="p2c3o4">
+              Latencias
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="p2c3o5" name="p2c3o5" formControlName="p2c3o5">
+            <label class="form-check-label" for="p2c3o5">
+              Circunloquios
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="p2c3o6" name="p2c3o6" formControlName="p2c3o6">
+            <label class="form-check-label" for="p2c3o6">
+              Perseveraciones
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <button class="btnForm" (click)="backTemplate()">Anterior</button>
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+          <button class="btnForm" (click)="nextTemplate()">Siguiente</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--
+  *****************************************************
+               Template 5
+  *****************************************************
+   -->
+  <div class="contentContainer " *ngIf="template==4" style="background-color: rgb(238, 210, 132);">
+
+    <h2>Evaluacion del Lenguaje - Repetición (repita las siguientes palabras)</h2>
+    <hr>
+    <!--palabra aislada-->
+    <h6 class="mt-3" style="text-align: left;">Palabra aislada</h6>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Sol: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)="sumapaso3()" class="form-select" name="p3p1" id="p3p1" formControlName="p3p1">
+          <option *ngFor="let p of p3p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p3p1">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion:{{forma.value.p3p1}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Precio: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)="sumapaso3()" class="form-select" name="p3p2" id="p3p2" formControlName="p3p2">
+          <option *ngFor="let p of p3p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p3p2">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion:{{forma.value.p3p2}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Pensamiento: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)="sumapaso3()" class="form-select" name="p3p3" id="p3p3" formControlName="p3p3">
+          <option *ngFor="let p of p3p2" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p3p3">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion:{{forma.value.p3p3}}</span>
+      </div>
+    </div>
+    <hr class="mt-3">
+    <!--frases y oraciones simples-->
+    <h6 class="mt-3" style="text-align: left;">Frases y oraciones simples</h6>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Mucho Ruido: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)="sumapaso3()" class="form-select" name="p3p4" id="p3p4" formControlName="p3p4">
+          <option *ngFor="let p of p3p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p3p4">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion:{{forma.value.p3p4}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>El Hombre guardo las herramientas: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)="sumapaso3()" class="form-select" name="p3p5" id="p3p5" formControlName="p3p5">
+          <option *ngFor="let p of p3p3" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p3p5">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion:{{forma.value.p3p5}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>La Mujer le regalo un libro a su Hijo: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)="sumapaso3()" class="form-select" name="p3p6" id="p3p6" formControlName="p3p6">
+          <option *ngFor="let p of p3p4" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p3p3">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion:{{forma.value.p3p6}}</span>
+      </div>
+    </div>
+    <hr class="mt-3">
+    <!--frases y oraciones simples-->
+    <h6 class="mt-3" style="text-align: left;">No Palabra</h6>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Fo: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)="sumapaso3()" class="form-select" name="p3p7" id="p3p7" formControlName="p3p7">
+          <option *ngFor="let p of p3p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p3p7">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion:{{forma.value.p3p7}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Treyo: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)="sumapaso3()" class="form-select" name="p3p8" id="p3p8" formControlName="p3p8">
+          <option *ngFor="let p of p3p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p3p8">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion:{{forma.value.p3p8}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Almusipa: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)="sumapaso3()" class="form-select" name="p3p9" id="p3p9" formControlName="p3p9">
+          <option *ngFor="let p of p3p2" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p3p9">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion:{{forma.value.p3p9}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+      </div>
+      <div class="col-md-4 form-floating">
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Total: {{tp3}}</span>
+      </div>
+    </div>
+
+    <!--   Observaciones cualitativas de la repeticion -->
+    <hr class="mt-3">
+    <h6 class="mt-3" style="text-align: left;">Observaciones cualitativas de la repeticion</h6>
+    <div class="row">
+      <div class="col-md-6">
+        <button class="btnForm" (click)="backTemplate()">Anterior</button>
+      </div>
+      <div class="col-md-6" style="text-align: right;">
+        <button class="btnForm" (click)="nextTemplate()">Siguiente</button>
+      </div>
+    </div>
+  </div>
+
+  <!--
+  *****************************************************
+               Template 6
+  *****************************************************
+   -->
+  <div class="contentContainer " *ngIf="template==5" style="background-color: rgb(238, 210, 132);">
+    <h2> Evaluacion del Lenguaje - Denominación </h2>
+    <hr class="mt-3">
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>¿Qué es esto? (Lámina “cama”): </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)="sumapaso4()" class="form-select" name="p4p1" id="p4p1" formControlName="p4p1">
+          <option *ngFor="let p of p4p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p4p1">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion: {{forma.value.p4p1}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>¿Qué es esto? (Lámina “violín”): </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)="sumapaso4()" class="form-select" name="p4p2" id="p4p2" formControlName="p4p2">
+          <option *ngFor="let p of p4p2" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p4p2">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion: {{forma.value.p4p2}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>¿Qué hace esta persona? (Lámina “come”): </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)="sumapaso4()" class="form-select" name="p4p3" id="p4p3" formControlName="p4p3">
+          <option *ngFor="let p of p4p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p4p3">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion: {{forma.value.p4p3}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>¿Qué hace esta persona? (Lámina “rema”): </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)="sumapaso4()" class="form-select" name="p4p4" id="p4p4" formControlName="p4p4">
+          <option *ngFor="let p of p4p2" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p4p4">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion: {{forma.value.p4p4}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+      </div>
+      <div class="col-md-4 form-floating">
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Total: {{tp4}}</span>
+      </div>
+    </div>
+    <!--
+       *****************************************************
+                Observaciones cualitativasen la Denominación
+       *****************************************************
+       -->
+    <hr class="mt-3">
+    <h6 style="text-align: left;">Observaciones cualitativas en la Denominación</h6>
+    <div class="row">
+      <div class="col-md-6">
+        <button class="btnForm" (click)="backTemplate()">Anterior</button>
+      </div>
+      <div class="col-md-6" style="text-align: right;">
+        <button class="btnForm" (click)="nextTemplate()">Siguiente</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!--
+  *****************************************************
+               Template 7
+  *****************************************************
+   -->
+  <div class="contentContainer " *ngIf="template==6" style="background-color: rgb(238, 210, 132);">
+
+    <h2>Evaluacion del Lenguaje - Lectura </h2>
+    <hr class="mt-3">
+    <h6 style="text-align: left;">Emparejamiento palabra escrita-dibujo </h6>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Mono (lámina: reloj, mono, león, moño): </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)='sumapaso5()' class="form-select" name="p5p1" id="p5p1" formControlName="p5p1">
+          <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p5p1">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion:{{forma.value.p5p1}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Arco (lámina: martillo, flecha, arco, barco): </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)='sumapaso5()' class="form-select" name="p5p2" id="p5p2" formControlName="p5p2">
+          <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p5p2">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion:{{forma.value.p5p2}}</span>
+      </div>
+    </div>
+    <!--Lectura en voz alta de palabras-->
+    <hr class="mt-3">
+    <h6 style="text-align: left;" class="mt-3">Lectura en voz alta de palabras </h6>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Casa: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)='sumapaso5()' class="form-select" name="p5p3" id="p5p3" formControlName="p5p3">
+          <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p5p3">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion:{{forma.value.p5p3}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Grito: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)='sumapaso5()' class="form-select" name="p5p4" id="p5p4" formControlName="p5p4">
+          <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p5p4">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion:{{forma.value.p5p4}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Estatua: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)='sumapaso5()' class="form-select" name="p5p5" id="p5p5" formControlName="p5p5">
+          <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p5p5">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion:{{forma.value.p5p5}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Comunidad: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)='sumapaso5()' class="form-select" name="p5p6" id="p5p6" formControlName="p5p6">
+          <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p5p6">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion:{{forma.value.p5p6}}</span>
+      </div>
+    </div>
+    <!--Lectura en voz alta de no-palabras-->
+    <hr class="mt-3">
+    <h6 style="text-align: left;" class="mt-3">Lectura en voz alta de no-palabras </h6>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Ne: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)='sumapaso5()' class="form-select" name="p5p7" id="p5p7" formControlName="p5p7">
+          <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p5p7">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion:{{forma.value.p5p7}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Cho: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)='sumapaso5()' class="form-select" name="p5p8" id="p5p8" formControlName="p5p8">
+          <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p5p8">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion:{{forma.value.p5p8}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Bleja: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)='sumapaso5()' class="form-select" name="p5p9" id="p5p9" formControlName="p5p9">
+          <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p5p9">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion:{{forma.value.p5p9}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Tudipro: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)='sumapaso5()' class="form-select" name="p5p10" id="p5p10" formControlName="p5p10">
+          <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p5p10">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion:{{forma.value.p5p10}}</span>
+      </div>
+    </div>
+    <!--Comando escrito-->
+    <hr class="mt-3">
+    <h6 style="text-align: left;" class="mt-3">Comando escrito </h6>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Saque la lengua y salude con la mano: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)='sumapaso5()' class="form-select" name="p5p11" id="p5p11" formControlName="p5p11">
+          <option *ngFor="let p of p5p2" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p5p11">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion:{{forma.value.p5p11}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+      </div>
+      <div class="col-md-4 form-floating">
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Total: {{tp5}}</span>
+      </div>
+    </div>
+
+    <!-- Observaciones cualitativasen en la Lectura -->
+    <hr class="mt-3">
+    <h6 class="mt-3" style="text-align: left;">Observaciones cualitativas en la Lectura</h6>
+    <div class="row">
+      <div class="col-md-6">
+        <button class="btnForm" (click)="backTemplate()">Anterior</button>
+      </div>
+      <div class="col-md-6" style="text-align: right;">
+        <button class="btnForm" (click)="nextTemplate()">Siguiente</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!--
+  *****************************************************
+               Template 8
+  *****************************************************
+   -->
+  <div class="contentContainer " *ngIf="template==7" style="background-color: rgb(238, 210, 132);">
+
+    <h2>Evaluacion del Lenguaje - Escritura
+    </h2>
+    <hr class="mt-3">
+    <h6 class="mt-3" style="text-align: left;">Dictado de letras por el nombre </h6>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Escriba la letra EME: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)=" sumapaso6()" class="form-select" name="p6p1" id="p6p1" formControlName="p6p1">
+          <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p6p1">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion: {{forma.value.p6p1}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Escriba la letra ZETA: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)=" sumapaso6()" class="form-select" name="p6p2" id="p6p2" formControlName="p6p2">
+          <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p6p2">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion: {{forma.value.p6p2}}</span>
+      </div>
+    </div>
+    <hr class="mt-3">
+    <h6 class="mt-3" style="text-align: left;">Dictado de palabras </h6>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Mano: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)=" sumapaso6()" class="form-select" name="p6p3" id="p6p3" formControlName="p6p3">
+          <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p6p3">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion: {{forma.value.p6p3}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Gente: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)=" sumapaso6()" class="form-select" name="p6p4" id="p6p4" formControlName="p6p4">
+          <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p6p4">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion: {{forma.value.p6p4}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Esperanza: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)=" sumapaso6()" class="form-select" name="p6p5" id="p6p5" formControlName="p6p5">
+          <option *ngFor="let p of p5p2" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p6p5">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion: {{forma.value.p6p5}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Aclaración: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)=" sumapaso6()" class="form-select" name="p6p6" id="p6p6" formControlName="p6p6">
+          <option *ngFor="let p of p5p2" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p6p6">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion: {{forma.value.p6p6}}</span>
+      </div>
+    </div>
+    <hr class="mt-3">
+    <h6 class="mt-3" style="text-align: left;">Dictado de no palabras </h6>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Jo: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)=" sumapaso6()" class="form-select" name="p6p7" id="p6p7" formControlName="p6p7">
+          <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p6p7">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion: {{forma.value.p6p7}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Guela: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)=" sumapaso6()" class="form-select" name="p6p8" id="p6p8" formControlName="p6p8">
+          <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p6p8">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion: {{forma.value.p6p8}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+        <h5>Dirchole: </h5>
+      </div>
+      <div class="col-md-4 form-floating">
+        <select (click)=" sumapaso6()" class="form-select" name="p6p9" id="p6p9" formControlName="p6p9">
+          <option *ngFor="let p of p5p2" [value]=p.valor>{{p.etiqueta}}</option>
+        </select>
+        <label for="p6p9">Respuesta</label>
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Puntuacion: {{forma.value.p6p9}}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="mt-3 col-md-6">
+      </div>
+      <div class="col-md-4 form-floating">
+      </div>
+      <div class="col-md-2 mt-3">
+        <span>Total: {{tp6}}</span>
+      </div>
+    </div>
+    <!--  Observaciones cualitativasen en la Escritura   -->
+    <hr class="mt-3">
+    <h6 class="mt-3" style="text-align: left;">Observaciones cualitativas en la Escritura</h6>
+    <div class="subcontent">
+      <div>
+        <h5 style="top:0 ;"> Selecciones sus obsercaciones:</h5>
+      </div>
+      <div>
+        <div class="inLine50">
+          <label>
+            <input type="checkbox" class="inputCheckbox"> No escribe por plejía/paresia de la mano dominante
+          </label>
+        </div>
+        <div class="inLine50">
+          <label>
+            <input type="checkbox" class="inputCheckbox"> Utiliza mano no dominante
+          </label>
+        </div>
+        <div class="inLine30">
+        </div>
+      </div>
+    </div>
+    <div class="inLine500">
+      <button class="btnForm" (click)="backTemplate()">Anterior</button>
+    </div>
+    <div class="inLine500" style="text-align: right;">
+      <button class="btnForm" (click)="nextTemplate()">Siguiente</button>
+    </div>
+  </div>
+
+
+  <!--
+  *****************************************************
+               Template 9 - Resumen de puntaje
+  *****************************************************
+   -->
+  <div class="contentContainer " style="background-color: rgb(111, 104, 204);" *ngIf="template==8">
+
+    <h2>Evaluacion del Lenguaje - Resultado</h2>
+    <hr class="mt-3">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <table class="table table-bordered tabl-striped table-light" style="width: 100%; margin-top: 1% ;">
+          <thead class="table-dark">
+            <tr>
+              <th style="padding: 4px;" scope="col" style="width: 30%; ">Tarea</th>
+              <th style="padding: 4px;" scope="col" style="width: 5%; ">Puntaje</th>
+              <th style="padding: 4px;" scope="col" style="width: 20%; ">Nivel Funcional</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th style="padding: 4px;" scope="row">Comprensión auditiva</th>
+              <td style="padding: 4px;">{{tp1}}/6</td>
+              <td style="padding: 4px;">Alteración leve</td>
+            </tr>
+            <tr>
+              <th style="padding: 4px;" scope="row">Expresión oral:</th>
+              <td style="padding: 4px;">{{tp2}}/6</td>
+              <td style="padding: 4px;">Alteración moderada</td>
+            </tr>
+            <tr>
+              <th style="padding: 4px;" scope="row">Repetición: </th>
+              <td style="padding: 4px;">{{tp3}}/6</td>
+              <td style="padding: 4px;">Alteración moderada</td>
+            </tr>
+            <tr>
+              <th style="padding: 4px;" scope="row">Denominación: </th>
+              <td style="padding: 4px;">{{tp4}}/6</td>
+              <td style="padding: 4px;">Alteración moderada</td>
+            </tr>
+            <tr>
+              <th style="padding: 4px;" scope="row">Lectura: </th>
+              <td style="padding: 4px;">{{tp5}}/6</td>
+              <td style="padding: 4px;">Alteración moderada</td>
+            </tr>
+            <tr>
+              <th style="padding: 4px;" scope="row">Escritura:</th>
+              <td style="padding: 4px;">{{tp6}}/6</td>
+              <td style="padding: 4px;">Alteración leve</td>
+            </tr>
+            <tr>
+              <th style="padding: 4px;" scope="row">Total</th>
+              <td style="padding: 4px;">{{tpt}}/36</td>
+              <td style="padding: 4px;"></td>
+              
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+    <!--   Conclusiones y recomendaciones-->
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <div class="form-floating">
+          <textarea class="form-control"  id="conclisiones" style="height: 100px"
+            name="conclisiones" formControlName="conclusiones"></textarea>
+          <label for="floatingTextarea2">Conclusiones y recomendaciones</label>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+    <div class="inLine500">
+      <button class="btnForm" (click)="backTemplate()">Anterior</button>
+    </div>
+    <div class="inLine500" style="text-align: right;">
+      <button class="btnForm" (click)="nextTemplate()">Siguiente</button>
+    </div>
+  </div>
+
+
+
+  <!--
+     *****************************************************
+              Template 10 - Prueba resumen
+     *****************************************************
+     -->
+
+
+  <div class="contentContainer" *ngIf="template==9">
+    <!--
+     *****************************************************
+              Resumen protocolo
+     *****************************************************
+     -->
+    <h4><strong>Resumen del Protocolo</strong></h4>
+    <h6 style="text-align: left;">Datos del Paciente</h6>
+    <hr>
+    <div class="subcontent">
+
+      <!--
+              *****************************************************
+                              information patient
+              *****************************************************
+              -->
+      <div class="inLine70">
+        <label><strong>Paciente:</strong>mes010289 </label>
+      </div>
+      <div class="inLine7030" style="text-align: center;">
+        <label><strong> Fecha:</strong> </label>
+      </div>
+      <!--
+              *****************************************************
+                             patient information
+              *****************************************************
+              -->
+      <div>
+        <div>
+          <div class="inLine50">
+            <strong>Fecha de Nacimiento: </strong> 01/02/1989
+          </div>
+          <div class="inLine50">
+            <strong> Escolaridad:</strong> Universitaria Incompleta
+          </div>
+          <div class="inLine50">
+            <strong> Lengua Materna: </strong>Español
+          </div>
+          <div class="inLine50">
+            <strong> Dominio Manual:</strong> Diestro
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--
+              *****************************************************
+                              patient value
+              *****************************************************
+              -->
+    <br>
+    <div>
+      <h6 style="text-align: left;">Evaluacion del Paciente:</h6>
+      <hr>
+      <div class="subcontent">
+        <label><strong>Resumen Clinico</strong>: El paciente presenta
+          ......................................</label><br>
+      </div>
+    </div>
+    <br>
+    <h6 style="text-align: left;">Síntomas neurológicos actuales (redondee los signos observados y tache los
+      ausentes):
+    </h6>
+    <hr>
+    <!--
+         *****************************************************
+                   neurological symptoms
+         *****************************************************
+      -->
+    <div class="subcontent">
+      <!--
+                *****************************************************
+                                Alerta
+                *****************************************************
+        -->
+      <div class="inLine50">
+        <h5><strong>Alerta: </strong>Conservado </h5>
+      </div>
+      <!--
+                *****************************************************
+                                Estado Emocional
+                *****************************************************
+        -->
+      <div class="inLine50">
+        <h5><strong>Estado emocional:</strong> Conservado</h5>
+      </div>
+      <!--
+                *****************************************************
+                                Fuerza
+                *****************************************************
+        -->
+      <div class="inLine50">
+        <h5><strong> Fuerza:</strong> Conservado</h5>
+      </div>
+      <!--
+                *****************************************************
+                                Coordinación motora
+                *****************************************************
+        -->
+      <div class="inLine50">
+        <h5><strong> Coordinación motora:</strong> Conservado</h5>
+      </div>
+      <!--
+                *****************************************************
+                                Sensibilidad
+                *****************************************************
+        -->
+      <div class="inLine50">
+        <h5><strong> Sensibilidad: </strong> Conservado</h5>
+      </div>
+
+      <!--
+                *****************************************************
+                                Visión
+                *****************************************************
+        -->
+      <div class="inLine50">
+        <h5><strong> Visión:</strong> Conservado</h5>
+      </div>
+      <!--
+                *****************************************************
+                                Audición
+                *****************************************************
+        -->
+      <div class="inLine50">
+        <h5><strong> Audición:</strong> Conservado</h5>
+      </div>
+      <!--
+                *****************************************************
+                                Atención espacial
+                *****************************************************
+        -->
+      <div class="inLine50">
+        <h5><strong> Atención espacial:</strong> Conservado</h5>
+      </div>
+      <!--
+                *****************************************************
+                                Praxia manual
+                *****************************************************
+        -->
+      <div class="inLine50">
+        <h5><strong> Praxia manual:</strong> Conservado</h5>
+      </div>
+      <!--
+                *****************************************************
+                                Praxia orolinguofaciales
+                *****************************************************
+        -->
+      <div class="inLine50">
+        <h5><strong> Praxia orolinguofaciales:</strong> Conservado</h5>
+      </div>
+      <!--
+                *****************************************************
+                                Deglución
+                *****************************************************
+        -->
+      <div>
+        <h5><strong> Deglución:</strong> Conservado</h5>
+      </div>
+    </div>
+    <!--
+        *****************************************************
+                 Informe Cuantitativo
+        *****************************************************
+        -->
+    <div>
+      <h4><strong>Informe Cuantitativo</strong></h4>
+
+      <h6 style="text-align: left;">Comprensión auditiva</h6>
+      <hr>
+      <div class="subcontent">
+
+        <!--
+        *****************************************************
+                 palabra oida-dibujo
+        *****************************************************
+        -->
+        <div>
+          <h5> <strong> Señale la OVEJA:</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5><strong>Señale el PLATO:</strong> Respuesta Correcta</h5>
+        </div>
+        <!--
+        *****************************************************
+                 comandos oidos
+        *****************************************************
+        -->
+        <div>
+          <h5><strong>Tóquese la oreja: </strong>Respuesta Correcta </h5>
+        </div>
+        <div>
+          <h5><strong>Señale el techo y luego mueva su cabeza:</strong> Respuesta Correcta </h5>
+        </div>
+        <div>
+          <h5><strong>Señale la puerta, abra la boca y luego cierre los ojos:</strong> Respuesta Correcta </h5>
+        </div>
+      </div>
+
+      <h6 style="text-align: left;">Expresion Oral</h6>
+      <hr>
+      <div class="subcontent">
+
+        <!--
+      *****************************************************
+               Expresion Oral
+      *****************************************************
+      -->
+        <div>
+          <h5> <strong> Diga su nombre completo:</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5><strong>¿En que ciudad nacio?:</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5><strong>Diga que ve en la lamina (lamina: "El Parque"):</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5><strong>Diga que ve en la lamina (lamina: "Consulta Medica"):</strong> Respuesta Correcta</h5>
+        </div>
+      </div>
+
+      <h6 style="text-align: left;">Repetición </h6>
+      <hr>
+      <div class="subcontent">
+
+        <!--
+    *****************************************************
+             Repetición
+    *****************************************************
+    -->
+        <div>
+          <h5> <strong> Sol:</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5><strong>Precio:</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5><strong>Pensamiento:</strong> Respuesta Correcta</h5>
+        </div>
+
+        <div>
+          <h5><strong>Mucho Ruido:</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5> <strong> El Hombre guardo las herramientas:</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5><strong>Precio:</strong> La Mujer le regalo un libro a su Hijo</h5>
+        </div>
+
+        <div>
+          <h5><strong>Fo:</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5><strong>Treyo:</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5><strong>Almusipa:</strong> Respuesta Correcta</h5>
+        </div>
+      </div>
+
+      <h6 style="text-align: left;">Denominación </h6>
+      <hr>
+      <div class="subcontent">
+
+        <!--
+    *****************************************************
+             Denominación
+    *****************************************************
+    -->
+        <div>
+          <h5> <strong> ¿Qué es esto? (Lámina “cama”):</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5><strong>¿Qué es esto? (Lámina “violín”):</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5><strong>¿Qué hace esta persona? (Lámina “come”):</strong> Respuesta Correcta</h5>
+        </div>
+
+        <div>
+          <h5><strong>¿Qué hace esta persona? (Lámina “rema”):</strong> Respuesta Correcta</h5>
+        </div>
+      </div>
+
+      <h6 style="text-align: left;">Lectura </h6>
+      <hr>
+      <div class="subcontent">
+
+        <!--
+    *****************************************************
+             Lectura
+    *****************************************************
+    -->
+
+        <h6 style="text-align: left;">Emparejaminto palabra escrita con dibujo </h6>
+        <hr>
+        <div class="subcontent">
+          <div>
+            <h5> <strong> Mono (lámina: reloj, mono, león, moño):</strong> Respuesta Correcta</h5>
+          </div>
+          <div>
+            <h5><strong>Arco (lámina: martillo, flecha, arco, barco):</strong> Respuesta Correcta</h5>
+          </div>
+        </div>
+        <div>
+          <h5><strong>Casa:</strong> Respuesta Correcta</h5>
+        </div>
+
+        <div>
+          <h5><strong>Grito:</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5><strong>Estatua:</strong> Respuesta Correcta</h5>
+        </div>
+
+        <div>
+          <h5><strong>Comunidad:</strong> Respuesta Correcta</h5>
+        </div>
+
+        <div>
+          <h5><strong>Ne:</strong> Respuesta Correcta</h5>
+        </div>
+
+        <div>
+          <h5><strong>Cho:</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5><strong>Bleja:</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5><strong>Tudipro:</strong> Respuesta Correcta</h5>
+        </div>
+
+        <div>
+          <h5><strong>Saque la lengua y salude con la mano:</strong> Respuesta Correcta</h5>
+        </div>
+      </div>
+
+
+
+      <h6 style="text-align: left;">Escritura </h6>
+      <hr>
+      <div class="subcontent">
+
+        <!--
+      *****************************************************
+              Escritura
+      *****************************************************
+      -->
+        <div>
+          <h5> <strong> EME:</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5><strong>ZETA:</strong> Respuesta Correcta</h5>
+        </div>
+
+        <div>
+          <h5><strong>Mano:</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5><strong>Gente:</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5><strong>Esperanza:</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5><strong>Aclaración:</strong> Respuesta Correcta</h5>
+        </div>
+
+        <div>
+          <h5><strong>Jo:</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5><strong>Guela:</strong> Respuesta Correcta</h5>
+        </div>
+        <div>
+          <h5><strong>Dirchole:</strong> Respuesta Correcta</h5>
+        </div>
+      </div>
+
+      <div style="align-items: center; justify-content: center;   display: flex;">
+        <button class="buttonPEBA">Descargar Informe Cuantitativo y Resumen del Puntaje</button>
+      </div>
+
+      <!--
+          *****************************************************
+                   Observaciones cualitativas en comprensión auditiva
+          *****************************************************
+          -->
+      <div>
+        <h4><strong>Informe Cualitativo</strong></h4>
+        <!--
+          *****************************************************
+                   Observaciones cualitativas en comprensión auditiva
+          *****************************************************
+          -->
+        <h6 style="text-align: left;">Observaciones cualitativas en comprensión auditiva</h6>
+        <hr>
+        <div class="subcontent">
+          <div>
+            <h5 style="top:0 ;"> <strong>Emparejamiento:</strong> Errores Formales, Errores Semanticos</h5>
+          </div>
+          <div>
+            <h5><strong> Comandos Oidos:</strong></h5>
+          </div>
+        </div>
+
+
+        <!--
+          *****************************************************
+                  Observaciones cualitativas en expresion oral
+          *****************************************************
+          -->
+        <h6 style="text-align: left;">Observaciones cualitativas en expresion oral</h6>
+        <hr>
+        <div class="subcontent">
+          <div>
+            <h5 style="top:0 ;"> <strong>Fluencia (palabra/tiempo):</strong> Disminuida</h5>
+          </div>
+          <div>
+            <h5><strong> Articulacion:</strong></h5>
+          </div>
+          <div>
+            <h5><strong> Parafasias:</strong>Formales</h5>
+          </div>
+        </div>
+
+        <!--
+          *****************************************************
+                  Observaciones cualitativas de la repeticion
+          *****************************************************
+          -->
+        <h6 style="text-align: left;">Observaciones cualitativas de la repeticion</h6>
+        <hr>
+        <div class="subcontent">
+          <div>
+            <h5 style="top:0 ;"> <strong>Articulacion:</strong> Alterada</h5>
+          </div>
+          <div>
+            <h5><strong> Parafasias:</strong>Semanticas</h5>
+          </div>
+        </div>
+
+
+        <!--
+          *****************************************************
+                 Observaciones cualitativas en la Denominación
+          *****************************************************
+          -->
+        <h6 style="text-align: left;">Observaciones cualitativas en la Denominación</h6>
+        <hr>
+        <div class="subcontent">
+          <div>
+            <h5 style="top:0 ;"> <strong>Selecciones sus obsercaciones:</strong> Muletillas, Circunloquios
+              referenciales
+            </h5>
+          </div>
+        </div>
+
+
+        <!--
+          *****************************************************
+                 Observaciones cualitativas en la Lectura
+          *****************************************************
+          -->
+        <h6 style="text-align: left;">Observaciones cualitativas en la Lectura</h6>
+        <hr>
+        <div class="subcontent">
+          <div>
+            <h5 style="top:0 ;"> <strong>Errores subléxicos en lectura:</strong> Paralexias Semánticas</h5>
+          </div>
+          <div>
+            <h5><strong> Errores en emparejamiento:</strong>Errores Semánticos</h5>
+          </div>
+          <div>
+            <h5><strong> En comando:</strong>Alteración del orden</h5>
+          </div>
+        </div>
+
+        <!--
+          *****************************************************
+                 Observaciones cualitativas en la Lectura
+          *****************************************************
+          -->
+        <h6 style="text-align: left;">Observaciones cualitativas en la Lectura</h6>
+        <hr>
+        <div class="subcontent">
+          <div>
+            <h5 style="top:0 ;"> <strong>Selecciones sus obsercaciones:</strong> Utiliza mano no dominante</h5>
+          </div>
+        </div>
+
+      </div>
+
+      <h4><strong>Puntaje del Protocolo</strong></h4>
+      <h6 style="text-align: left;">Resumen de puntaje</h6>
+      <hr>
+      <div class="subcontent">
+      </div>
+
+      <!--
+        *****************************************************
+                 Tabla de puntaje
+        *****************************************************
+        -->
+      <table class="table table-bordered tabl-striped table-light" style="width: 100%; margin-top: 1% ;">
+        <thead class="table-dark">
+          <tr>
+            <th style="padding: 4px;" scope="col" style="width: 30%; ">Tarea</th>
+            <th style="padding: 4px;" scope="col" style="width: 5%; ">Puntaje</th>
+            <th style="padding: 4px;" scope="col" style="width: 20%; ">Nivel Funcional</th>
+            <th style="padding: 4px;" scope="col" style="width: 45%; ">Comentarios</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th style="padding: 4px;" scope="row">Comprensión auditiva</th>
+            <td style="padding: 4px;">5/6</td>
+            <td style="padding: 4px;">Alteración leve</td>
+            <td style="padding: 4px;">Destaco . . . . </td>
+          </tr>
+          <tr>
+            <th style="padding: 4px;" scope="row">Expresión oral:</th>
+            <td style="padding: 4px;">4/6</td>
+            <td style="padding: 4px;">Alteración moderada</td>
+            <td style="padding: 4px;">Destaco . . . . </td>
+          </tr>
+          <tr>
+            <th style="padding: 4px;" scope="row">Repetición: </th>
+            <td style="padding: 4px;">4/6</td>
+            <td style="padding: 4px;">Alteración moderada</td>
+            <td style="padding: 4px;">Destaco . . . . </td>
+          </tr>
+          <tr>
+            <th style="padding: 4px;" scope="row">Denominación: </th>
+            <td style="padding: 4px;">4/6</td>
+            <td style="padding: 4px;">Alteración moderada</td>
+            <td style="padding: 4px;">Destaco . . . . </td>
+          </tr>
+          <tr>
+            <th style="padding: 4px;" scope="row">Lectura: </th>
+            <td style="padding: 4px;">3/6</td>
+            <td style="padding: 4px;">Alteración moderada</td>
+            <td style="padding: 4px;">Destaco . . . . </td>
+          </tr>
+          <tr>
+            <th style="padding: 4px;" scope="row">Escritura:</th>
+            <td style="padding: 4px;">5/6</td>
+            <td style="padding: 4px;">Alteración leve</td>
+            <td style="padding: 4px;">Destaco . . . . </td>
+          </tr>
+          <tr>
+            <th style="padding: 4px;" scope="row">Total</th>
+            <td style="padding: 4px;">25/36</td>
+            <td style="padding: 4px;">Alteración leve</td>
+            <td style="padding: 4px;">Dato el resultado . . . </td>
+          </tr>
+        </tbody>
+      </table>
+      <!--
+        *****************************************************
+                 Conclusiones y recomendaciones
+        *****************************************************
+        -->
+      <h5 style="top:0 ;"><strong>Conclusiones y recomendaciones: </strong> Se concluye que el paciente presenta .
+        ..
+        .
+        .
+        . . .. . . . . </h5>
+    </div>
+    <div style="align-items: center; justify-content: center;   display: flex;">
+      <button class="buttonPEBA">Descargar Informe Cualitatio y Resumen del Puntaje</button>
+    </div>
+
+  </div>
+</form>
+<pre>
+{{template}}
+  {{forma.value|json}}
+{{forma.valid}}
+{{mispacientes[2]|json}}
+</pre>

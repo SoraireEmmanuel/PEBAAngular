@@ -1,0 +1,134 @@
+<div class="contentContainer">
+  <form class="row g-3 needs-validation" autocomplete="off" [formGroup]="forma" (ngSubmit)="crearCuenta()">
+    <!--Title Form-->
+    <h2>Formulario de Registro del Profesional</h2>
+    <hr>
+    <div class="col-md-4">
+      <label for="validationCustom01" class="form-label">Apellido</label>
+      <input type="text" class="form-control" name="apellido" formControlName="apellido" placeholder="Apellido">
+      <div class="alert alert-danger pt-1 pb-1" *ngIf="apellidoValido()">
+        *Este campo es obligatorio, el nombre tiene que tener mas de dos letras.
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label for="validationCustom02" class="form-label">Nombre</label>
+      <input type="text" class="form-control" name="nombres" placeholder="Nombre" formControlName="nombre">
+      <div class="alert alert-danger pt-1 pb-1" *ngIf="nombreValido()">
+        *Este campo es obligatorio, el apellido tiene que tener mas de dos letras.
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label for="validationCustomUsername" class="form-label">Profesion</label>
+      <select class="form-select" name="profesion" formControlName="profesion">
+        <option *ngFor="let prof of profesion" [value]=prof>{{prof}}</option>
+      </select>
+      <div class="alert alert-danger pt-1 pb-1" *ngIf="profesionValido()">
+        *Este campo es obligatorio, debe seleccionar una profesion.
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label for="validationCustom03" class="form-label">Matricula</label>
+      <input type="text" class="form-control" name="matricula" formControlName="matricula" placeholder="Matricula">
+      <div class="alert alert-danger pt-1 pb-1" *ngIf="matriculaValido()">
+        *Este campo es obligatorio, debe ingresar su matricula.
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label for="validationCustom04" class="form-label">Contraseña</label>
+      <input class="form-control" name="password1" formControlName="password1" placeholder="Contraseña">
+      <div class="alert alert-danger pt-1 pb-1" *ngIf="password1Valido()">
+        *Este campo es obligatorio. La contraseña tiene que tener mas de 6 caracteres, y debe incluir matusculas, minusculas y numeros.
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label for="validationCustom05" class="form-label">Repita la Contraseña</label>
+      <input type="text" class="form-control" name="password2" formControlName="password2"
+        placeholder="Repita la Contraseña">
+      <div class="alert alert-danger pt-1 pb-1" *ngIf="password2Valido()">
+        *Este campo es obligatorio. Las contraseñas no coinciden.
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label for="validationCustom04" class="form-label">Email</label>
+      <input class="form-control" type="email" name="correo" formControlName="correo" placeholder="Correo Electronico">
+      <div class="alert alert-danger pt-1 pb-1" *ngIf="mailValido()">
+        *Este campo es obligatorio, formato de mail no aceptado.
+      </div>
+    </div>
+    <div class="col-md-8 d-flex align-items-center">
+      <div class="form-check ">
+        <input class="form-check-input" type="checkbox" name="terminos" formControlName="terminosyCondiciones">
+        <label class="form-check-label" for="invalidCheck2">
+          Estoy de acuerdo con los <a class="termsConditions">Terminos y Condiciones</a>
+        </label>
+        <div class="alert alert-danger pt-1 pb-1" *ngIf="terminosValido()">
+          *Tiene que aceptar los terminos y condiciones. 
+        </div>
+      </div>
+    </div>
+    <div class="col-12" style="text-align: center;">
+      <button class="btn btnForm" type="submit" style="width: 90%;">Registrar</button>
+    </div>
+  </form>
+
+  <!--
+  <form autocomplete="off" [formGroup]="forma" (ngSubmit)="crearCuenta()">
+   
+    <h2>Formulario de Registro del Profesional</h2>
+    <hr>
+    
+    <div class="subcontent" style="margin-left: 0%;">
+      <div class=" inLine500" style="text-align: right;">
+        <label>Apellido: <input class="inputType1" type="text" name="apellidos" formControlName="apellido"
+            placeholder="Apellido" >
+        </label>
+        <div class=" invalid-feedback">asfda</div>
+      </div>
+      <div class=" inLine500" style="text-align: right;">
+        <label>Nombre: <input class="inputType1" type="text" name="nombres" placeholder="Nombre"
+            formControlName="nombre" [class.is-invalid]="nombreValido"></label>
+      </div>
+      <div class=" inLine500" style="text-align: right;">
+        <label>Profesión: <select class="inputType1" name="profesion" formControlName="profesion">
+            <option *ngFor="let prof of profesion" [value]=prof>{{prof}}</option>
+          </select> </label>
+      </div>
+      <div class=" inLine500" style="text-align: right;">
+        <label>Matricula: <input class="inputType1" type="text" name="matricula" formControlName="matricula"
+            placeholder="Matricula"></label>
+      </div>
+      <div class=" inLine500" style="text-align: right;">
+        <label>Contraseña: <input class="inputType1" type="password" name="password1" formControlName="password1"
+            placeholder="Contraseña"></label>
+      </div>
+      <div class=" inLine500" style="text-align: right;">
+        <label >Repita su contraseña: <input class="inputType1" type="password" name="password2"
+            formControlName="password2" placeholder="Repita su Contraseña"></label>
+      </div>
+      <div class="invalid-feedback">hola</div>
+      <div class=" inLine500" style="text-align: right;">
+        <label>Correo Electronico: <input class="inputType1" type="email" name="correo" formControlName="correo"
+            placeholder="Correo Electronico"> </label>
+      </div>
+      <div class=" inLine500" style="text-align: center;">
+        <label>
+          <input type="checkbox" class="inputCheckbox" name="terminos" formControlName="terminosyCondiciones"> Estoy de
+          acuerdo con los <a class="termsConditions">Terminos y
+            Condiciones</a></label>
+      </div>
+      <br>
+
+    
+      <div style="text-align: center;">
+        <button class="btnForm" type="submit" >Registrar</button>
+      </div>
+    </div>
+  </form>-->
+  <pre>
+    estado del formulario 
+    {{forma.valid}} y {{forma.status}}
+    <br>
+    {{forma.value|json}}
+  </pre>
+
+</div>
