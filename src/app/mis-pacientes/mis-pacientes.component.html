@@ -1,20 +1,29 @@
 <div class="contentContainer">
+  
   <div class="row " style="text-align: center;" >
     <h2>Mis Pacientes </h2> 
     <table class="table table-bordered tabl-striped table-light">
       <thead class="table-dark">
         <tr>
           <th scope="col" class="tableTitle">Id Paciente</th>
+          <th scope="col" class="tableTitle">Iniciales</th>
+          <th scope="col" class="tableTitle">Fecha Nacimiento</th>
           <th scope="col" class="tableTitle">Accion</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *ngFor="let item of pacientes">
         <tr>
-          <th scope="row">MES01021989</th>
+          <th scope="row">{{item.Cod_Paciente}}</th>
+          <td>
+            {{item.Iniciales}}
+          </td>
+          <td>
+            {{item.FechaNacimiento}}
+          </td>
           <td>
             <div>
-              <button class="btn btnTable">Nuevo Protocolo</button>
-              <button class="btn btnTable">Protocolos Previos </button>
+              <button class="btn btnTable" (click)="nuevoProtocolo(item.Id_Paciente)">Nuevo Protocolo</button>
+              <button class="btn btnTable" (click)="protocolosPrevios(item.Id_Paciente)" >Protocolos Previos </button>
             </div>
           </td>
         </tr>

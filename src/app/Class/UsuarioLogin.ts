@@ -1,10 +1,10 @@
 
 export class UsuarioLogin {
-    public Matricula: string;
+    public Mail: string;
     public PasswordCuenta: string;
     
-constructor() {
-    this.Matricula = "";
+constructor() {     
+    this.Mail = "";
     this.PasswordCuenta = "";
   }
 

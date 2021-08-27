@@ -8,12 +8,13 @@
     <h2>Nuevo Protocolo - Identificacion del Paciente</h2>
     <h6 style="text-align: left;">Datos del Paciente</h6>
     <hr>
+   
     <div class="subcontent row">
       <div class="col-md-8">
         <div class="col-md-6 ">
           <label for="validationCustom01" class="form-label">Seleccione un paciente registrado </label>
-          <select (click)="seleccionarPaciente()" class="form-select" name="mispacientes" formControlName='indice'>
-            <option *ngFor="let pac of mispacientes;let indice=index" [value]=indice>{{pac.idUsuario}}</option>
+          <select  class="form-select" (click)="usuariotemplate()" (change)="usuariotemplate()" name="mispacientes" formControlName='indice' >
+            <option *ngFor="let pac of mispacientes;let indice=index" [value]=indice>{{pac.Cod_Paciente}}</option>
           </select>
         </div>
       </div>
@@ -23,19 +24,19 @@
       <div class="row mt-3">
         <div class="col-md-3">
           <label for="validationCustom01" class="form-label"> Fecha de Nacimiento </label>
-          {{forma.value.nacimiento}}
+          {{nacimiento}}
         </div>
         <div class="col-md-3">
           <label for="validationCustom01" class="form-label"> Escolaridad</label>
-          {{forma.value.escolaridad}}
+          {{escolaridad}}
         </div>
         <div class="col-md-3">
           <label for="validationCustom01" class="form-label"> Lengua Materna </label>
-          {{forma.value.lengua}}
+          {{lengua}}
         </div>
         <div class="col-md-3">
           <label for="validationCustom01" class="form-label"> Dominancia Manual</label>
-          {{forma.value.dominancia}}
+          {{dominancia}}
         </div>
       </div>
     </div>
@@ -43,11 +44,15 @@
     <div>
       <div class="subcontent mt-5">
         <div class="form-floating">
-          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"
+          <textarea class="form-control"  id="resumenclinico" style="height: 100px"
             name="resumenclinico" formControlName="resumenclinico"></textarea>
-          <label for="floatingTextarea2">Resumen Clinico</label>
+          <label for="resumenclinico">Resumen Clinico</label>
         </div>
-        {{forma.value.resumenclinico}}
+      <div class="mt-3">
+        <p><strong>Importante: </strong>antes de continuar por favor descargue el siguiente archivo 
+        donde encontrara las laminas necesarias para llevar a cabo el protocolo. 
+        <a href="https://drive.google.com/file/d/1IwGjpXtl1PH0A3r2FgJWuvqMIa9wyIqg/view?usp=sharing" target="_blank">Descargar</a></p>
+      </div>
       </div>
     </div>
     <div class="row">
@@ -73,7 +78,7 @@
       </div>
       <div class="col-md-2">
         <div class="form-check">
-          <input class="form-check-input" type="radio" id="alterado" name="alerta" value="CONSERVADO"
+          <input class="form-check-input"  type="radio" id="alterado" name="alerta" value="CONSERVADO"
             formControlName="alerta">
           <label class="form-check-label" for="alterado">Conservado</label>
         </div>
@@ -85,7 +90,7 @@
       </div>
       <div *ngIf="forma.value.alerta=='ALTERADO'" class="col-md-5 form-floating">
         <select class="form-select" id="alertaopcion" name="alertaopcion" formControlName='alertaOpcion'
-          aria-label="Floating label select example">
+        >
           <option *ngFor="let ale of alertaOpciones" [value]=ale>{{ale}}</option>
         </select>
         <label for="floatingSelect">Tipo de alteracion</label>
@@ -210,7 +215,7 @@
       <div *ngIf="forma.value.sensibilidad=='ALTERADO'" class="col-md-5 form-floating">
         <select class="form-select" name="sensibilidadOpcion" id="sensibilidadopcion"
           formControlName="sensibilidadOpcion">
-          <option *ngFor="let coord of coordinacioncOpciones" [value]=coord>{{coord}}</option>
+          <option *ngFor="let coord of sensibilidadOpciones" [value]=coord>{{coord}}</option>
         </select>
         <label for="fuerzaopcion">Tipo de alteracion</label>
       </div>
@@ -517,6 +522,7 @@
     <hr class="mt-3" style="height: 2px;border:none; background-color: black; color: black;">
     <!--Observaciones cualitativas-->
     <h6 class="mt-3" style="text-align: left;">Observaciones cualitativas en comprensión auditiva</h6>
+   <!--
     <div class="mt-3 row" style="background-color: rgb(153, 111, 95,0.1);">
       <div class="col-md-2">
         <h5> Emparejamiento: </h5>
@@ -543,6 +549,7 @@
         </label>
       </div>
     </div>
+  
     <div class="row mt-1 " style="background-color: rgb(153, 111, 95,0.1);">
       <div class="col-md-2">
         <h5>Comandos Oidos:</h5>
@@ -564,6 +571,7 @@
       <div class="col-md-3">
       </div>
     </div>
+  -->
     <div class="row">
       <div class="col-md-6">
         <button class="btnForm " (click)="backTemplate()">Anterior</button>
@@ -651,6 +659,7 @@
       <!--Observaciones cualitativas en expresion oral -->
       <hr class="mt-3" style="height: 2px;border:none; background-color: black; color: black;">
       <h6 class="mt-3" style="text-align: left;">Observaciones cualitativas en expresion oral</h6>
+      <!--
       <div class="row mt-1 " style="background-color: rgb(153, 111, 95,0.1);">
         <div class="col-md-3">
           <h5>Fluencia (palabra/tiempo):</h5>
@@ -792,6 +801,7 @@
           </div>
         </div>
       </div>
+    -->
       <div class="row">
         <div class="col-md-6">
           <button class="btnForm" (click)="backTemplate()">Anterior</button>
@@ -1463,32 +1473,32 @@
             <tr>
               <th style="padding: 4px;" scope="row">Comprensión auditiva</th>
               <td style="padding: 4px;">{{tp1}}/6</td>
-              <td style="padding: 4px;">Alteración leve</td>
+              <td style="padding: 4px;">{{nivelca}}</td>
             </tr>
             <tr>
               <th style="padding: 4px;" scope="row">Expresión oral:</th>
               <td style="padding: 4px;">{{tp2}}/6</td>
-              <td style="padding: 4px;">Alteración moderada</td>
+              <td style="padding: 4px;">{{niveleo}}</td>
             </tr>
             <tr>
               <th style="padding: 4px;" scope="row">Repetición: </th>
               <td style="padding: 4px;">{{tp3}}/6</td>
-              <td style="padding: 4px;">Alteración moderada</td>
+              <td style="padding: 4px;">{{nivelr}}</td>
             </tr>
             <tr>
               <th style="padding: 4px;" scope="row">Denominación: </th>
               <td style="padding: 4px;">{{tp4}}/6</td>
-              <td style="padding: 4px;">Alteración moderada</td>
+              <td style="padding: 4px;">{{niveld}}</td>
             </tr>
             <tr>
               <th style="padding: 4px;" scope="row">Lectura: </th>
               <td style="padding: 4px;">{{tp5}}/6</td>
-              <td style="padding: 4px;">Alteración moderada</td>
+              <td style="padding: 4px;">{{nivell}}</td>
             </tr>
             <tr>
               <th style="padding: 4px;" scope="row">Escritura:</th>
               <td style="padding: 4px;">{{tp6}}/6</td>
-              <td style="padding: 4px;">Alteración leve</td>
+              <td style="padding: 4px;">{{nivele}}</td>
             </tr>
             <tr>
               <th style="padding: 4px;" scope="row">Total</th>
@@ -1515,602 +1525,22 @@
       <div class="col-md-1"></div>
     </div>
     <div class="inLine500">
+      
       <button class="btnForm" (click)="backTemplate()">Anterior</button>
     </div>
     <div class="inLine500" style="text-align: right;">
-      <button class="btnForm" (click)="nextTemplate()">Siguiente</button>
-    </div>
-  </div>
-
-
-
-  <!--
-     *****************************************************
-              Template 10 - Prueba resumen
-     *****************************************************
-     -->
-
-
-  <div class="contentContainer" *ngIf="template==9">
-    <!--
-     *****************************************************
-              Resumen protocolo
-     *****************************************************
-     -->
-    <h4><strong>Resumen del Protocolo</strong></h4>
-    <h6 style="text-align: left;">Datos del Paciente</h6>
-    <hr>
-    <div class="subcontent">
-
-      <!--
-              *****************************************************
-                              information patient
-              *****************************************************
-              -->
-      <div class="inLine70">
-        <label><strong>Paciente:</strong>mes010289 </label>
-      </div>
-      <div class="inLine7030" style="text-align: center;">
-        <label><strong> Fecha:</strong> </label>
-      </div>
-      <!--
-              *****************************************************
-                             patient information
-              *****************************************************
-              -->
       <div>
-        <div>
-          <div class="inLine50">
-            <strong>Fecha de Nacimiento: </strong> 01/02/1989
-          </div>
-          <div class="inLine50">
-            <strong> Escolaridad:</strong> Universitaria Incompleta
-          </div>
-          <div class="inLine50">
-            <strong> Lengua Materna: </strong>Español
-          </div>
-          <div class="inLine50">
-            <strong> Dominio Manual:</strong> Diestro
-          </div>
-        </div>
-      </div>
+      <button class="btnForm" (click)="finalizarProtocolo()">Finalizar Protocolo</button>
     </div>
-    <!--
-              *****************************************************
-                              patient value
-              *****************************************************
-              -->
-    <br>
     <div>
-      <h6 style="text-align: left;">Evaluacion del Paciente:</h6>
-      <hr>
-      <div class="subcontent">
-        <label><strong>Resumen Clinico</strong>: El paciente presenta
-          ......................................</label><br>
-      </div>
+      <button class="btnForm" (click)="verProtocolo()">Ver Protocolo</button>
     </div>
-    <br>
-    <h6 style="text-align: left;">Síntomas neurológicos actuales (redondee los signos observados y tache los
-      ausentes):
-    </h6>
-    <hr>
-    <!--
-         *****************************************************
-                   neurological symptoms
-         *****************************************************
-      -->
-    <div class="subcontent">
-      <!--
-                *****************************************************
-                                Alerta
-                *****************************************************
-        -->
-      <div class="inLine50">
-        <h5><strong>Alerta: </strong>Conservado </h5>
-      </div>
-      <!--
-                *****************************************************
-                                Estado Emocional
-                *****************************************************
-        -->
-      <div class="inLine50">
-        <h5><strong>Estado emocional:</strong> Conservado</h5>
-      </div>
-      <!--
-                *****************************************************
-                                Fuerza
-                *****************************************************
-        -->
-      <div class="inLine50">
-        <h5><strong> Fuerza:</strong> Conservado</h5>
-      </div>
-      <!--
-                *****************************************************
-                                Coordinación motora
-                *****************************************************
-        -->
-      <div class="inLine50">
-        <h5><strong> Coordinación motora:</strong> Conservado</h5>
-      </div>
-      <!--
-                *****************************************************
-                                Sensibilidad
-                *****************************************************
-        -->
-      <div class="inLine50">
-        <h5><strong> Sensibilidad: </strong> Conservado</h5>
-      </div>
-
-      <!--
-                *****************************************************
-                                Visión
-                *****************************************************
-        -->
-      <div class="inLine50">
-        <h5><strong> Visión:</strong> Conservado</h5>
-      </div>
-      <!--
-                *****************************************************
-                                Audición
-                *****************************************************
-        -->
-      <div class="inLine50">
-        <h5><strong> Audición:</strong> Conservado</h5>
-      </div>
-      <!--
-                *****************************************************
-                                Atención espacial
-                *****************************************************
-        -->
-      <div class="inLine50">
-        <h5><strong> Atención espacial:</strong> Conservado</h5>
-      </div>
-      <!--
-                *****************************************************
-                                Praxia manual
-                *****************************************************
-        -->
-      <div class="inLine50">
-        <h5><strong> Praxia manual:</strong> Conservado</h5>
-      </div>
-      <!--
-                *****************************************************
-                                Praxia orolinguofaciales
-                *****************************************************
-        -->
-      <div class="inLine50">
-        <h5><strong> Praxia orolinguofaciales:</strong> Conservado</h5>
-      </div>
-      <!--
-                *****************************************************
-                                Deglución
-                *****************************************************
-        -->
-      <div>
-        <h5><strong> Deglución:</strong> Conservado</h5>
-      </div>
     </div>
-    <!--
-        *****************************************************
-                 Informe Cuantitativo
-        *****************************************************
-        -->
-    <div>
-      <h4><strong>Informe Cuantitativo</strong></h4>
-
-      <h6 style="text-align: left;">Comprensión auditiva</h6>
-      <hr>
-      <div class="subcontent">
-
-        <!--
-        *****************************************************
-                 palabra oida-dibujo
-        *****************************************************
-        -->
-        <div>
-          <h5> <strong> Señale la OVEJA:</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5><strong>Señale el PLATO:</strong> Respuesta Correcta</h5>
-        </div>
-        <!--
-        *****************************************************
-                 comandos oidos
-        *****************************************************
-        -->
-        <div>
-          <h5><strong>Tóquese la oreja: </strong>Respuesta Correcta </h5>
-        </div>
-        <div>
-          <h5><strong>Señale el techo y luego mueva su cabeza:</strong> Respuesta Correcta </h5>
-        </div>
-        <div>
-          <h5><strong>Señale la puerta, abra la boca y luego cierre los ojos:</strong> Respuesta Correcta </h5>
-        </div>
-      </div>
-
-      <h6 style="text-align: left;">Expresion Oral</h6>
-      <hr>
-      <div class="subcontent">
-
-        <!--
-      *****************************************************
-               Expresion Oral
-      *****************************************************
-      -->
-        <div>
-          <h5> <strong> Diga su nombre completo:</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5><strong>¿En que ciudad nacio?:</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5><strong>Diga que ve en la lamina (lamina: "El Parque"):</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5><strong>Diga que ve en la lamina (lamina: "Consulta Medica"):</strong> Respuesta Correcta</h5>
-        </div>
-      </div>
-
-      <h6 style="text-align: left;">Repetición </h6>
-      <hr>
-      <div class="subcontent">
-
-        <!--
-    *****************************************************
-             Repetición
-    *****************************************************
-    -->
-        <div>
-          <h5> <strong> Sol:</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5><strong>Precio:</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5><strong>Pensamiento:</strong> Respuesta Correcta</h5>
-        </div>
-
-        <div>
-          <h5><strong>Mucho Ruido:</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5> <strong> El Hombre guardo las herramientas:</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5><strong>Precio:</strong> La Mujer le regalo un libro a su Hijo</h5>
-        </div>
-
-        <div>
-          <h5><strong>Fo:</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5><strong>Treyo:</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5><strong>Almusipa:</strong> Respuesta Correcta</h5>
-        </div>
-      </div>
-
-      <h6 style="text-align: left;">Denominación </h6>
-      <hr>
-      <div class="subcontent">
-
-        <!--
-    *****************************************************
-             Denominación
-    *****************************************************
-    -->
-        <div>
-          <h5> <strong> ¿Qué es esto? (Lámina “cama”):</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5><strong>¿Qué es esto? (Lámina “violín”):</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5><strong>¿Qué hace esta persona? (Lámina “come”):</strong> Respuesta Correcta</h5>
-        </div>
-
-        <div>
-          <h5><strong>¿Qué hace esta persona? (Lámina “rema”):</strong> Respuesta Correcta</h5>
-        </div>
-      </div>
-
-      <h6 style="text-align: left;">Lectura </h6>
-      <hr>
-      <div class="subcontent">
-
-        <!--
-    *****************************************************
-             Lectura
-    *****************************************************
-    -->
-
-        <h6 style="text-align: left;">Emparejaminto palabra escrita con dibujo </h6>
-        <hr>
-        <div class="subcontent">
-          <div>
-            <h5> <strong> Mono (lámina: reloj, mono, león, moño):</strong> Respuesta Correcta</h5>
-          </div>
-          <div>
-            <h5><strong>Arco (lámina: martillo, flecha, arco, barco):</strong> Respuesta Correcta</h5>
-          </div>
-        </div>
-        <div>
-          <h5><strong>Casa:</strong> Respuesta Correcta</h5>
-        </div>
-
-        <div>
-          <h5><strong>Grito:</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5><strong>Estatua:</strong> Respuesta Correcta</h5>
-        </div>
-
-        <div>
-          <h5><strong>Comunidad:</strong> Respuesta Correcta</h5>
-        </div>
-
-        <div>
-          <h5><strong>Ne:</strong> Respuesta Correcta</h5>
-        </div>
-
-        <div>
-          <h5><strong>Cho:</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5><strong>Bleja:</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5><strong>Tudipro:</strong> Respuesta Correcta</h5>
-        </div>
-
-        <div>
-          <h5><strong>Saque la lengua y salude con la mano:</strong> Respuesta Correcta</h5>
-        </div>
-      </div>
-
-
-
-      <h6 style="text-align: left;">Escritura </h6>
-      <hr>
-      <div class="subcontent">
-
-        <!--
-      *****************************************************
-              Escritura
-      *****************************************************
-      -->
-        <div>
-          <h5> <strong> EME:</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5><strong>ZETA:</strong> Respuesta Correcta</h5>
-        </div>
-
-        <div>
-          <h5><strong>Mano:</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5><strong>Gente:</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5><strong>Esperanza:</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5><strong>Aclaración:</strong> Respuesta Correcta</h5>
-        </div>
-
-        <div>
-          <h5><strong>Jo:</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5><strong>Guela:</strong> Respuesta Correcta</h5>
-        </div>
-        <div>
-          <h5><strong>Dirchole:</strong> Respuesta Correcta</h5>
-        </div>
-      </div>
-
-      <div style="align-items: center; justify-content: center;   display: flex;">
-        <button class="buttonPEBA">Descargar Informe Cuantitativo y Resumen del Puntaje</button>
-      </div>
-
-      <!--
-          *****************************************************
-                   Observaciones cualitativas en comprensión auditiva
-          *****************************************************
-          -->
-      <div>
-        <h4><strong>Informe Cualitativo</strong></h4>
-        <!--
-          *****************************************************
-                   Observaciones cualitativas en comprensión auditiva
-          *****************************************************
-          -->
-        <h6 style="text-align: left;">Observaciones cualitativas en comprensión auditiva</h6>
-        <hr>
-        <div class="subcontent">
-          <div>
-            <h5 style="top:0 ;"> <strong>Emparejamiento:</strong> Errores Formales, Errores Semanticos</h5>
-          </div>
-          <div>
-            <h5><strong> Comandos Oidos:</strong></h5>
-          </div>
-        </div>
-
-
-        <!--
-          *****************************************************
-                  Observaciones cualitativas en expresion oral
-          *****************************************************
-          -->
-        <h6 style="text-align: left;">Observaciones cualitativas en expresion oral</h6>
-        <hr>
-        <div class="subcontent">
-          <div>
-            <h5 style="top:0 ;"> <strong>Fluencia (palabra/tiempo):</strong> Disminuida</h5>
-          </div>
-          <div>
-            <h5><strong> Articulacion:</strong></h5>
-          </div>
-          <div>
-            <h5><strong> Parafasias:</strong>Formales</h5>
-          </div>
-        </div>
-
-        <!--
-          *****************************************************
-                  Observaciones cualitativas de la repeticion
-          *****************************************************
-          -->
-        <h6 style="text-align: left;">Observaciones cualitativas de la repeticion</h6>
-        <hr>
-        <div class="subcontent">
-          <div>
-            <h5 style="top:0 ;"> <strong>Articulacion:</strong> Alterada</h5>
-          </div>
-          <div>
-            <h5><strong> Parafasias:</strong>Semanticas</h5>
-          </div>
-        </div>
-
-
-        <!--
-          *****************************************************
-                 Observaciones cualitativas en la Denominación
-          *****************************************************
-          -->
-        <h6 style="text-align: left;">Observaciones cualitativas en la Denominación</h6>
-        <hr>
-        <div class="subcontent">
-          <div>
-            <h5 style="top:0 ;"> <strong>Selecciones sus obsercaciones:</strong> Muletillas, Circunloquios
-              referenciales
-            </h5>
-          </div>
-        </div>
-
-
-        <!--
-          *****************************************************
-                 Observaciones cualitativas en la Lectura
-          *****************************************************
-          -->
-        <h6 style="text-align: left;">Observaciones cualitativas en la Lectura</h6>
-        <hr>
-        <div class="subcontent">
-          <div>
-            <h5 style="top:0 ;"> <strong>Errores subléxicos en lectura:</strong> Paralexias Semánticas</h5>
-          </div>
-          <div>
-            <h5><strong> Errores en emparejamiento:</strong>Errores Semánticos</h5>
-          </div>
-          <div>
-            <h5><strong> En comando:</strong>Alteración del orden</h5>
-          </div>
-        </div>
-
-        <!--
-          *****************************************************
-                 Observaciones cualitativas en la Lectura
-          *****************************************************
-          -->
-        <h6 style="text-align: left;">Observaciones cualitativas en la Lectura</h6>
-        <hr>
-        <div class="subcontent">
-          <div>
-            <h5 style="top:0 ;"> <strong>Selecciones sus obsercaciones:</strong> Utiliza mano no dominante</h5>
-          </div>
-        </div>
-
-      </div>
-
-      <h4><strong>Puntaje del Protocolo</strong></h4>
-      <h6 style="text-align: left;">Resumen de puntaje</h6>
-      <hr>
-      <div class="subcontent">
-      </div>
-
-      <!--
-        *****************************************************
-                 Tabla de puntaje
-        *****************************************************
-        -->
-      <table class="table table-bordered tabl-striped table-light" style="width: 100%; margin-top: 1% ;">
-        <thead class="table-dark">
-          <tr>
-            <th style="padding: 4px;" scope="col" style="width: 30%; ">Tarea</th>
-            <th style="padding: 4px;" scope="col" style="width: 5%; ">Puntaje</th>
-            <th style="padding: 4px;" scope="col" style="width: 20%; ">Nivel Funcional</th>
-            <th style="padding: 4px;" scope="col" style="width: 45%; ">Comentarios</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th style="padding: 4px;" scope="row">Comprensión auditiva</th>
-            <td style="padding: 4px;">5/6</td>
-            <td style="padding: 4px;">Alteración leve</td>
-            <td style="padding: 4px;">Destaco . . . . </td>
-          </tr>
-          <tr>
-            <th style="padding: 4px;" scope="row">Expresión oral:</th>
-            <td style="padding: 4px;">4/6</td>
-            <td style="padding: 4px;">Alteración moderada</td>
-            <td style="padding: 4px;">Destaco . . . . </td>
-          </tr>
-          <tr>
-            <th style="padding: 4px;" scope="row">Repetición: </th>
-            <td style="padding: 4px;">4/6</td>
-            <td style="padding: 4px;">Alteración moderada</td>
-            <td style="padding: 4px;">Destaco . . . . </td>
-          </tr>
-          <tr>
-            <th style="padding: 4px;" scope="row">Denominación: </th>
-            <td style="padding: 4px;">4/6</td>
-            <td style="padding: 4px;">Alteración moderada</td>
-            <td style="padding: 4px;">Destaco . . . . </td>
-          </tr>
-          <tr>
-            <th style="padding: 4px;" scope="row">Lectura: </th>
-            <td style="padding: 4px;">3/6</td>
-            <td style="padding: 4px;">Alteración moderada</td>
-            <td style="padding: 4px;">Destaco . . . . </td>
-          </tr>
-          <tr>
-            <th style="padding: 4px;" scope="row">Escritura:</th>
-            <td style="padding: 4px;">5/6</td>
-            <td style="padding: 4px;">Alteración leve</td>
-            <td style="padding: 4px;">Destaco . . . . </td>
-          </tr>
-          <tr>
-            <th style="padding: 4px;" scope="row">Total</th>
-            <td style="padding: 4px;">25/36</td>
-            <td style="padding: 4px;">Alteración leve</td>
-            <td style="padding: 4px;">Dato el resultado . . . </td>
-          </tr>
-        </tbody>
-      </table>
-      <!--
-        *****************************************************
-                 Conclusiones y recomendaciones
-        *****************************************************
-        -->
-      <h5 style="top:0 ;"><strong>Conclusiones y recomendaciones: </strong> Se concluye que el paciente presenta .
-        ..
-        .
-        .
-        . . .. . . . . </h5>
-    </div>
-    <div style="align-items: center; justify-content: center;   display: flex;">
-      <button class="buttonPEBA">Descargar Informe Cualitatio y Resumen del Puntaje</button>
-    </div>
-
-  </div>
+  </div> 
 </form>
 <pre>
 {{template}}
   {{forma.value|json}}
 {{forma.valid}}
-{{mispacientes[2]|json}}
+{{sintomasneurologicos|json}}
 </pre>

@@ -1,0 +1,606 @@
+<div class="contentContainer">
+  <!--
+     *****************************************************
+              Resumen protocolo
+     *****************************************************
+     -->
+  <div id='encabezado' #encabezado>
+    <h4><strong>Resumen del Protocolo</strong></h4>
+    <h6 style="text-align: left;">Datos del Paciente</h6>
+    <hr>
+    <div class="subcontent">
+
+      <!--
+              *****************************************************
+                              information patient
+              *****************************************************
+              -->
+      <div class="inLine70">
+        <label><strong>Paciente: </strong>{{paciente[0].Cod_Paciente}} </label>
+      </div>
+      <div class="inLine7030" style="text-align: center;">
+        <label><strong> Fecha: {{protocolo.Fecha_Protocolo}}</strong> </label>
+      </div>
+      <!--
+              *****************************************************
+                             patient information
+              *****************************************************
+              -->
+      <div>
+        <div>
+          <div class="inLine50">
+            <strong>Fecha de Nacimiento: </strong> {{paciente[0].FechaNacimiento}}
+          </div>
+          <div class="inLine50">
+            <strong> Escolaridad:</strong> {{paciente[0].Estudios}}
+          </div>
+          <div class="inLine50">
+            <strong> Lengua Materna: </strong>{{paciente[0].Lengua}}
+          </div>
+          <div class="inLine50">
+            <strong> Dominio Manual:</strong> {{paciente[0].Dominancia}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--
+              *****************************************************
+                              patient value
+              *****************************************************
+              -->
+    <br>
+    <div>
+      <h6 style="text-align: left;">Evaluacion del Paciente:</h6>
+      <hr>
+      <div class="subcontent">
+        <label><strong>Resumen Clinico</strong>: {{protocolo.ResumenClinico}}</label><br>
+      </div>
+    </div>
+    <br>
+    <h6 style="text-align: left;">Síntomas neurológicos:
+    </h6>
+    <hr>
+    <!--
+         *****************************************************
+                   neurological symptoms
+         *****************************************************
+      -->
+    <div class="subcontent">
+      <!--
+                *****************************************************
+                                Alerta
+                *****************************************************
+        -->
+      <div class="row">
+        <div class="col-md-6">
+          <h5><strong>Alerta: </strong> {{sintomasneuronales.Alerta}}</h5>
+        </div>
+        <div class="col-md-6">
+          <div *ngIf="sintomasneuronales.AlertaTipoAlteracion!=''">
+            <h5><strong>Tipo de Alteracion: </strong>{{sintomasneuronales.AlertaTipoAlteracion}}</h5>
+          </div>
+          <div *ngIf="sintomasneuronales.AlertaTipoAlteracionOtro!=''">
+            <h5><strong>¿Cual?: </strong>{{sintomasneuronales.AlertaTipoAlteracionOtro}}</h5>
+          </div>
+        </div>
+
+      </div>
+      <!--
+                *****************************************************
+                                Estado Emocional
+                *****************************************************
+        -->
+      <div class="row">
+        <div class=" col-md-6">
+          <h5><strong>Estado emocional: </strong> {{sintomasneuronales.EstadoEmocional}}</h5>
+        </div>
+        <div class=" col-md-6">
+          <div *ngIf="sintomasneuronales.EstadoEmocionalTipoAlteracion!=''">
+            <h5><strong>Tipo de Alteracion: </strong>{{sintomasneuronales.EstadoEmocionalTipoAlteracion}}</h5>
+          </div>
+          <div *ngIf="sintomasneuronales.EstadoEmocionalTipoAlteracionOtro!=''">
+            <h5><strong>¿Cual?: </strong>{{sintomasneuronales.EstadoEmocionalTipoAlteracionOtro}}</h5>
+          </div>
+        </div>
+
+      </div>
+      <!--
+                *****************************************************
+                                Fuerza
+                *****************************************************
+        -->
+      <div class="row">
+        <div class="col-md-6">
+          <h5><strong> Fuerza: </strong> {{sintomasneuronales.Fuerza}}</h5>
+        </div>
+        <div class="col-md-6">
+          <div *ngIf="sintomasneuronales.FuerzaTipoAlteracion!=''">
+            <h5><strong>Tipo de Alteracion: </strong>{{sintomasneuronales.FuerzaTipoAlteracion}}</h5>
+          </div>
+          <div *ngIf="sintomasneuronales.FuerzaTipoAlteracionOtro!=''">
+            <h5><strong>¿Cual?: </strong>{{sintomasneuronales.FuerzaTipoAlteracionOtro}}</h5>
+          </div>
+        </div>
+      </div>
+
+      <!--
+                *****************************************************
+                                Coordinación motora
+                *****************************************************
+        -->
+      <div class="row">
+        <div class="col-md-6">
+          <h5><strong> Coordinación motora: </strong> {{sintomasneuronales.CondicionMotora}}</h5>
+        </div>
+        <div class="col-md-6">
+          <div *ngIf="sintomasneuronales.CondicionMotoraTipoAlteracion!=''">
+            <h5><strong>Tipo de Alteracion: </strong>{{sintomasneuronales.CondicionMotoraTipoAlteracion}}</h5>
+          </div>
+          <div *ngIf="sintomasneuronales.CondicionMotoraTipoAlteracionOtro!=''">
+            <h5><strong>¿Cual?: </strong>{{sintomasneuronales.CondicionMotoraTipoAlteracionOtro}}</h5>
+          </div>
+        </div>
+      </div>
+      <!--
+                *****************************************************
+                                Sensibilidad
+                *****************************************************
+        -->
+      <div class="row">
+        <div class="col-md-6">
+          <h5><strong> Sensibilidad: </strong> {{sintomasneuronales.Sensibilidad}}</h5>
+        </div>
+        <div class="col-md-6">
+          <div *ngIf="sintomasneuronales.SensibilidadTipoAlteracion!=''">
+            <h5><strong>Tipo de Alteracion: </strong>{{sintomasneuronales.SensibilidadTipoAlteracion}}</h5>
+          </div>
+          <div *ngIf="sintomasneuronales.SensibilidadTipoAlteracionOtro!=''">
+            <h5><strong>¿Cual?: </strong>{{sintomasneuronales.SensibilidadTipoAlteracionOtro}}</h5>
+          </div>
+        </div>
+      </div>
+
+      <!--
+                *****************************************************
+                                Visión
+                *****************************************************
+        -->
+      <div class="row">
+        <div class="col-md-6">
+          <h5><strong> Visión: </strong> {{sintomasneuronales.Vision}}</h5>
+        </div>
+        <div *ngIf="sintomasneuronales.VisionTipoAlteracion!=''" class="col-md-6">
+          <h5><strong>Tipo de Alteracion: </strong>{{sintomasneuronales.VisionTipoAlteracion}}</h5>
+        </div>
+      </div>
+      <!--
+                *****************************************************
+                                Audición
+                *****************************************************
+        -->
+      <div class="row">
+        <div class="col-md-6">
+          <h5><strong> Audición: </strong> {{sintomasneuronales.Audicion}}</h5>
+        </div>
+        <div class="col-md-6" *ngIf="sintomasneuronales.AudicionTipoAlteracion!=''">
+          <h5><strong>Tipo de Alteracion: </strong>{{sintomasneuronales.AudicionTipoAlteracion}}</h5>
+        </div>
+
+      </div>
+      <!--
+                *****************************************************
+                                Atención espacial
+                *****************************************************
+        -->
+      <div class="row">
+        <div class="col-md-6">
+          <h5><strong> Atención espacial: </strong> {{sintomasneuronales.AtencionEspacial}}</h5>
+        </div>
+        <div class="col-md-6" *ngIf="sintomasneuronales.AtencionEspacialTipoAlteracion!=''">
+          <h5><strong>Tipo de Alteracion: </strong>{{sintomasneuronales.AtencionEspacialTipoAlteracion}}</h5>
+        </div>
+      </div>
+      <!--
+                *****************************************************
+                                Praxia manual
+                *****************************************************
+        -->
+      <div class="row">
+        <div class="col-md-6">
+          <h5><strong> Praxia manual: </strong> {{sintomasneuronales.PraxiaManual}}</h5>
+        </div>
+        <div class="col-md-6" *ngIf="sintomasneuronales.PraxiaManualTipoAlteracion!=''">
+          <h5><strong>Tipo de Alteracion: </strong>{{sintomasneuronales.PraxiaManualTipoAlteracion}}</h5>
+        </div>
+      </div>
+      <!--
+                *****************************************************
+                                Praxia orolinguofaciales
+                *****************************************************
+        -->
+      <div class="row">
+        <h5><strong> Praxia orolinguofaciales: </strong> {{sintomasneuronales.PraxiaOronguofaciales}}</h5>
+      </div>
+      <!--
+                *****************************************************
+                                Deglución
+                *****************************************************
+        -->
+      <div class="row">
+        <div class="col-md-6">
+          <h5><strong> Deglución: </strong> {{sintomasneuronales.Deglucion}}</h5>
+        </div>
+        <div class="col-md-6" *ngIf="sintomasneuronales.DeglucionTipoAlteracion!=''">
+          <h5><strong>Tipo de Alteracion: </strong>{{sintomasneuronales.DeglucionTipoAlteracion}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--
+        *****************************************************
+                 Informe Cuantitativo
+        *****************************************************
+        -->
+  <div id="cuantitativo" #cuantitativo>
+      <h4><strong>Informe Cuantitativo</strong></h4>
+
+      <h6 style="text-align: left;">Comprensión auditiva</h6>
+      <hr>
+      <div class="subcontent">
+
+        <!--
+        *****************************************************
+                 palabra oida-dibujo
+        *****************************************************
+        -->
+        <div>
+          <h5> <strong> Señale la OVEJA:</strong> {{cap1}} - Puntaje: {{comprensionAuditivaCuanti.SenialeLaOveja}} </h5>
+        </div>
+        <div>
+          <h5><strong>Señale el PLATO:</strong> {{cap2}} - Puntaje: {{comprensionAuditivaCuanti.SenialeElPato}}</h5>
+        </div>
+        <!--
+        *****************************************************
+                 comandos oidos
+        *****************************************************
+        -->
+        <div>
+          <h5><strong>Tóquese la oreja: </strong> {{cap3}} - Puntaje: {{comprensionAuditivaCuanti.ToqueseLaOreja}} </h5>
+        </div>
+        <div>
+          <h5><strong>Señale el techo y luego mueva su cabeza:</strong> {{cap4}} - Puntaje:
+            {{comprensionAuditivaCuanti.SenialeElTecho}} </h5>
+        </div>
+        <div>
+          <h5><strong>Señale la puerta, abra la boca y luego cierre los ojos:</strong> {{cap5}} - Puntaje:
+            {{comprensionAuditivaCuanti.SenialeLaPuerta}}</h5>
+        </div>
+      </div>
+
+      <h6 style="text-align: left;">Expresion Oral</h6>
+      <hr>
+      <div class="subcontent">
+
+        <!--
+      *****************************************************
+               Expresion Oral
+      *****************************************************
+      -->
+        <div>
+          <h5> <strong> Diga su nombre completo:</strong> {{eo1}} - Puntaje: {{expresionOralCuanti.DigaSuNombre}}</h5>
+        </div>
+        <div>
+          <h5><strong>¿En que ciudad nacio?:</strong> {{eo2}} - Puntaje: {{expresionOralCuanti.EnQueCiudadNacio}}</h5>
+        </div>
+        <div>
+          <h5><strong>Diga que ve en la lamina (lamina: "El Parque"):</strong> {{eo3}} - Puntaje:
+            {{expresionOralCuanti.LaminaElParque}}</h5>
+        </div>
+        <div>
+          <h5><strong>Diga que ve en la lamina (lamina: "Consulta Medica"):</strong> {{eo4}} - Puntaje:
+            {{expresionOralCuanti.LaminaConsultaMedica}}</h5>
+        </div>
+      </div>
+
+      <h6 style="text-align: left;">Repetición </h6>
+      <hr>
+      <div class="subcontent">
+
+        <!--
+    *****************************************************
+             Repetición
+    *****************************************************
+    -->
+        <div>
+          <h5> <strong> Sol:</strong> {{r1}} - Puntaje: {{repeticionCuanti.Sol}}</h5>
+        </div>
+        <div>
+          <h5><strong>Precio:</strong> {{r2}} - Puntaje: {{repeticionCuanti.Precio}}</h5>
+        </div>
+        <div>
+          <h5><strong>Pensamiento:</strong> {{r3}} - Puntaje: {{repeticionCuanti.Pensamiento}}</h5>
+        </div>
+
+        <div>
+          <h5><strong>Mucho Ruido:</strong> {{r4}} - Puntaje: {{repeticionCuanti.MuchoRuido}}</h5>
+        </div>
+        <div>
+          <h5> <strong> El Hombre guardo las herramientas:</strong> {{r5}} - Puntaje:
+            {{repeticionCuanti.ElHombreGuardo}}
+          </h5>
+        </div>
+        <div>
+          <h5><strong>La Mujer le regalo un libro a su Hijo:</strong> {{r6}} - Puntaje:
+            {{repeticionCuanti.LaMujerRegalo}}
+          </h5>
+        </div>
+
+        <div>
+          <h5><strong>Fo:</strong> {{r7}} - Puntaje: {{repeticionCuanti.Fo}}</h5>
+        </div>
+        <div>
+          <h5><strong>Treyo:</strong> {{r8}} - Puntaje: {{repeticionCuanti.Treyo}}</h5>
+        </div>
+        <div>
+          <h5><strong>Almusipa:</strong> {{r9}} - Puntaje: {{repeticionCuanti.Almusipa}}</h5>
+        </div>
+      </div>
+
+      <h6 style="text-align: left;">Denominación </h6>
+      <hr>
+      <div class="subcontent">
+
+        <!--
+    *****************************************************
+             Denominación
+    *****************************************************
+    -->
+        <div>
+          <h5> <strong> ¿Qué es esto? (Lámina “cama”):</strong>{{d1}} - Puntaje: {{denominacionCuanti.LaminaCama}}</h5>
+        </div>
+        <div>
+          <h5><strong>¿Qué es esto? (Lámina “violín”):</strong> {{d2}} - Puntaje: {{denominacionCuanti.LaminaViolin}}
+          </h5>
+        </div>
+        <div>
+          <h5><strong>¿Qué hace esta persona? (Lámina “come”):</strong> {{d3}} - Puntaje:
+            {{denominacionCuanti.LaminaCome}}</h5>
+        </div>
+
+        <div>
+          <h5><strong>¿Qué hace esta persona? (Lámina “rema”):</strong> {{d4}} - Puntaje:
+            {{denominacionCuanti.LaminaRema}}</h5>
+        </div>
+      </div>
+
+      <h6 style="text-align: left;">Lectura </h6>
+      <hr>
+      <div class="subcontent">
+
+        <!--
+    *****************************************************
+             Lectura
+    *****************************************************
+    -->
+
+        <div>
+          <h5> <strong> Mono (lámina: reloj, mono, león, moño):</strong> {{l1}} - Puntaje: {{lecturaCuanti.Mono}}</h5>
+        </div>
+        <div>
+          <h5><strong>Arco (lámina: martillo, flecha, arco, barco):</strong> {{l2}} - Puntaje: {{lecturaCuanti.Arco}}
+          </h5>
+        </div>
+
+        <div>
+          <h5><strong>Casa:</strong> {{l3}} - Puntaje: {{lecturaCuanti.Casa}}</h5>
+        </div>
+
+        <div>
+          <h5><strong>Grito:</strong> {{l4}} - Puntaje: {{lecturaCuanti.Grito}}</h5>
+        </div>
+        <div>
+          <h5><strong>Estatua:</strong> {{l5}} - Puntaje: {{lecturaCuanti.Estatua}}</h5>
+        </div>
+
+        <div>
+          <h5><strong>Comunidad:</strong> {{l6}} - Puntaje: {{lecturaCuanti.Comunidad}}</h5>
+        </div>
+
+        <div>
+          <h5><strong>Ne:</strong> {{l7}} - Puntaje: {{lecturaCuanti.Ne}}</h5>
+        </div>
+
+        <div>
+          <h5><strong>Cho:</strong> {{l8}} - Puntaje: {{lecturaCuanti.Cho}}</h5>
+        </div>
+        <div>
+          <h5><strong>Bleja:</strong> {{l9}} - Puntaje: {{lecturaCuanti.Bleja}}</h5>
+        </div>
+        <div>
+          <h5><strong>Tudipro:</strong> {{l10}} - Puntaje: {{lecturaCuanti.Tudipro}}</h5>
+        </div>
+
+        <div>
+          <h5><strong>Saque la lengua y salude con la mano:</strong> {{l11}} - Puntaje: {{lecturaCuanti.SaqueLaMano}}
+          </h5>
+        </div>
+      </div>
+
+
+
+      <h6 style="text-align: left;">Escritura </h6>
+      <hr>
+      <div class="subcontent">
+
+        <!--
+      *****************************************************
+              Escritura
+      *****************************************************
+      -->
+        <div>
+          <h5> <strong> EME:</strong> {{e1}} - Puntaje: {{escrituraCuanti.EME}}</h5>
+        </div>
+        <div>
+          <h5><strong>ZETA:</strong> {{e2}} - Puntaje: {{escrituraCuanti.ZETA}}</h5>
+        </div>
+
+        <div>
+          <h5><strong>Mano:</strong> {{e3}} - Puntaje: {{escrituraCuanti.ManoMano}}</h5>
+        </div>
+        <div>
+          <h5><strong>Gente:</strong> {{e4}} - Puntaje: {{escrituraCuanti.Gente}}</h5>
+        </div>
+        <div>
+          <h5><strong>Esperanza:</strong> {{e5}} - Puntaje: {{escrituraCuanti.Esperanza}}</h5>
+        </div>
+        <div>
+          <h5><strong>Aclaración:</strong> {{e6}} - Puntaje: {{escrituraCuanti.Aclaracion}}</h5>
+        </div>
+
+        <div>
+          <h5><strong>Jo:</strong> {{e7}} - Puntaje: {{escrituraCuanti.Jo}}</h5>
+        </div>
+        <div>
+          <h5><strong>Guela:</strong> {{e8}} - Puntaje: {{escrituraCuanti.Guela}}</h5>
+        </div>
+        <div>
+          <h5><strong>Dirchole:</strong> {{e9}} - Puntaje: {{escrituraCuanti.Dirchole}}</h5>
+        </div>
+      </div>
+    </div>
+    <div style="align-items: center; justify-content: center;   display: flex;">
+      <button class="buttonPEBA" (click)="createPDFCauntitativo()">Descargar Informe Cuantitativo y Resumen del Puntaje</button>
+    </div>
+
+    <!--
+          *****************************************************
+                   Observaciones cualitativas en comprensión auditiva
+          *****************************************************
+          -->
+    <div>
+      <h4><strong>Informe Cualitativo</strong></h4>
+      <!--
+          *****************************************************
+                   Observaciones cualitativas en comprensión auditiva
+          *****************************************************
+          -->
+      <h6 style="text-align: left;">Observaciones cualitativas en comprensión auditiva</h6>
+      <hr>
+      <!--
+          *****************************************************
+                  Observaciones cualitativas en expresion oral
+          *****************************************************
+          -->
+      <h6 style="text-align: left;">Observaciones cualitativas en expresion oral</h6>
+
+
+      <!--
+          *****************************************************
+                  Observaciones cualitativas de la repeticion
+          *****************************************************
+          -->
+      <h6 style="text-align: left;">Observaciones cualitativas de la repeticion</h6>
+      <hr>
+
+      <!--
+          *****************************************************
+                 Observaciones cualitativas en la Denominación
+          *****************************************************
+          -->
+      <h6 style="text-align: left;">Observaciones cualitativas en la Denominación</h6>
+
+
+      <!--
+          *****************************************************
+                 Observaciones cualitativas en la Lectura
+          *****************************************************
+          -->
+      <h6 style="text-align: left;">Observaciones cualitativas en la Lectura</h6>
+      <hr>
+
+      <!--
+          *****************************************************
+                 Observaciones cualitativas en la Lectura
+          *****************************************************
+          -->
+      <h6 style="text-align: left;">Observaciones cualitativas en la Lectura</h6>
+      <hr>
+    </div>
+<div id="tablapuntaje" #tablapuntaje>
+      <h4><strong>Puntaje del Protocolo</strong></h4>
+      <h6 style="text-align: left;">Resumen de puntaje</h6>
+      <hr>
+      <div class="subcontent">
+      </div>
+
+      <!--
+        *****************************************************
+                 Tabla de puntaje
+        *****************************************************
+        -->
+      <table class="table table-bordered tabl-striped table-light" style="width: 100%; margin-top: 1% ;">
+        <thead class="table-dark">
+          <tr>
+            <th style="padding: 4px;" scope="col" style="width: 30%; ">Tarea</th>
+            <th style="padding: 4px;" scope="col" style="width: 5%; ">Puntaje</th>
+            <th style="padding: 4px;" scope="col" style="width: 20%; ">Nivel Funcional</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th style="padding: 4px;" scope="row">Comprensión auditiva</th>
+            <td style="padding: 4px;">{{subtotalComprensionAuditiva| number: '1.1-2'}}/6</td>
+            <td style="padding: 4px;">{{subtotalComprensionAuditivaNivelFuncional}}</td>
+
+          </tr>
+          <tr>
+            <th style="padding: 4px;" scope="row">Expresión oral:</th>
+            <td style="padding: 4px;">{{subtotalExpresionOral| number: '1.1-2'}}/6</td>
+            <td style="padding: 4px;">{{subtotalExpresionOralNivelFuncional}}</td>
+
+          </tr>
+          <tr>
+            <th style="padding: 4px;" scope="row">Repetición: </th>
+            <td style="padding: 4px;">{{subtotalRepeticion| number: '1.1-2'}}/6</td>
+            <td style="padding: 4px;">{{subtotalRepeticionNivelFuncional}}</td>
+
+          </tr>
+          <tr>
+            <th style="padding: 4px;" scope="row">Denominación: </th>
+            <td style="padding: 4px;">{{subtotalDenominacion| number: '1.1-2'}}/6</td>
+            <td style="padding: 4px;">{{subtotalDenominacionNivelFuncional}}</td>
+
+          </tr>
+          <tr>
+            <th style="padding: 4px;" scope="row">Lectura: </th>
+            <td style="padding: 4px;">{{subtotalLectura| number: '1.1-2'}}/6</td>
+            <td style="padding: 4px;">{{subtotalLecturaNivelFuncional}}</td>
+
+          </tr>
+          <tr>
+            <th style="padding: 4px;" scope="row">Escritura:</th>
+            <td style="padding: 4px;">{{subtotalEscritura| number: '1.1-2' }}/6</td>
+            <td style="padding: 4px;">{{subtotalEscrituraNivelFuncional}} </td>
+
+          </tr>
+          <tr>
+            <th style="padding: 4px;" scope="row">Total</th>
+            <td style="padding: 4px;">{{protocolo.Total| number: '1.2'}}/36</td>
+            <td style="padding: 4px;"></td>
+
+          </tr>
+        </tbody>
+      </table>
+      <!--
+        *****************************************************
+                 Conclusiones y recomendaciones
+        *****************************************************
+        -->
+      <h5 style="top:0 ;"><strong>Conclusiones y recomendaciones: </strong>
+        {{protocolo.ConclusionesRecomendaciones}} </h5>
+    </div>
+    <div style="align-items: center; justify-content: center;   display: flex;">
+      <button class="buttonPEBA">Descargar Informe Cualitatio y Resumen del Puntaje</button>
+    </div>
+
+  </div>

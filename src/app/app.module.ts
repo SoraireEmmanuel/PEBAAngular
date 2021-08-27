@@ -27,7 +27,12 @@ import { NuevoProtocoloComponent } from './nuevo-protocolo/nuevo-protocolo.compo
 import { HistorialComponent } from './historial/historial.component';
 import { ProtocoloComponent } from './protocolo/protocolo.component';
 
+import { AutocompleteLibModule} from 'angular-ng-autocomplete'
 
+import { NgSelect2Module } from 'ng-select2';
+import { HistorialporusuarioComponent } from './component/historialporusuario/historialporusuario.component';
+import { NuevoprotocoloporidComponent } from './component/nuevoprotocoloporid/nuevoprotocoloporid.component';
+import { VerProtocoloComponent } from './component/ver-protocolo/ver-protocolo.component';
 
 @NgModule({
   declarations: [
@@ -39,14 +44,19 @@ import { ProtocoloComponent } from './protocolo/protocolo.component';
     RegistrarNuevoPacienteComponent,
     NuevoProtocoloComponent,
     HistorialComponent,
-    ProtocoloComponent
+    ProtocoloComponent,
+    HistorialporusuarioComponent,
+    NuevoprotocoloporidComponent,
+    VerProtocoloComponent
   ],
   imports: [
     HttpClientModule,
     NgbModule,
+    AutocompleteLibModule,
     FormsModule, 
     ReactiveFormsModule,
     BrowserModule,
+    NgSelect2Module,
     RouterModule.forRoot( ROUTES, {useHash:true}),
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot({

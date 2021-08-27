@@ -16,6 +16,7 @@ export class RegistrarUsuarioComponent implements OnInit {
   profesional: Profesional;
   forma: FormGroup;
   profesion = ["Fonoaudióloga/o", "Psicóloga/o", "Psicopedagoga/o"]
+ 
   constructor(private fb: FormBuilder, private toastr: ToastrService,
     private autenticacion: AutenticacionService) {
     this.forma = this.fb.group({
@@ -72,9 +73,6 @@ export class RegistrarUsuarioComponent implements OnInit {
         .subscribe ( respuesta => {
           console.log(respuesta);
         })
-  
-
-
       this.toastr.success('Se envio un mail para validar el correo, haga click en el LINK!!', 'CREACION EXITOSA');
     }
   }
