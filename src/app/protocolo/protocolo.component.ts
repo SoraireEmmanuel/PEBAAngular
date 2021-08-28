@@ -23,6 +23,7 @@ import { Router } from '@angular/router';
 })
 export class ProtocoloComponent implements OnInit {
   template: number;
+  enviado:boolean=false;
   //--------------------------------------------
   mispacientes: any;
   idpaciente:any;
@@ -212,8 +213,14 @@ nivele:any;
     this.idpaciente=this.mispacientes[this.forma.value.indice].Id_Paciente;
   }
   ngOnInit(): void {
+
   }
   nextTemplate() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
     this.cargarpasos();
     this.asignarNivelFuncional();
     if (this.template == 0) {
@@ -804,6 +811,7 @@ finalizarProtocolo(){
       console.log(resp);
       var id:any=resp;
       this.idprotocolo=id.Id_Protocolo;
+      this.enviado=true;
     })
   }
   cargarprotocolo(){

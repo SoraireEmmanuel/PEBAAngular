@@ -44,7 +44,11 @@
               name="resumenclinico" formControlName="resumenclinico"></textarea>
             <label for="floatingTextarea2">Resumen Clinico</label>
           </div>
-          {{forma.value.resumenclinico}}
+          <div class="mt-3">
+            <p><strong>Importante: </strong>antes de continuar por favor descargue el siguiente archivo 
+            donde encontrara las laminas necesarias para llevar a cabo el protocolo. 
+            <a href="https://drive.google.com/file/d/1IwGjpXtl1PH0A3r2FgJWuvqMIa9wyIqg/view?usp=sharing" target="_blank">Descargar</a></p>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -70,7 +74,7 @@
         </div>
         <div class="col-md-2">
           <div class="form-check">
-            <input class="form-check-input" type="radio" id="alterado" name="alerta" value="CONSERVADO"
+            <input class="form-check-input"  type="radio" id="alterado" name="alerta" value="CONSERVADO"
               formControlName="alerta">
             <label class="form-check-label" for="alterado">Conservado</label>
           </div>
@@ -82,7 +86,8 @@
         </div>
         <div *ngIf="forma.value.alerta=='ALTERADO'" class="col-md-5 form-floating">
           <select class="form-select" id="alertaopcion" name="alertaopcion" formControlName='alertaOpcion'
-            aria-label="Floating label select example">
+          
+          >
             <option *ngFor="let ale of alertaOpciones" [value]=ale>{{ale}}</option>
           </select>
           <label for="floatingSelect">Tipo de alteracion</label>
@@ -207,7 +212,7 @@
         <div *ngIf="forma.value.sensibilidad=='ALTERADO'" class="col-md-5 form-floating">
           <select class="form-select" name="sensibilidadOpcion" id="sensibilidadopcion"
             formControlName="sensibilidadOpcion">
-            <option *ngFor="let coord of coordinacioncOpciones" [value]=coord>{{coord}}</option>
+            <option *ngFor="let coord of sensibilidadOpciones" [value]=coord>{{coord}}</option>
           </select>
           <label for="fuerzaopcion">Tipo de alteracion</label>
         </div>
@@ -431,7 +436,7 @@
             <h5> Señale la OVEJA (lámina: oreja, plancha, oveja, vaca): </h5>
           </div>
           <div class="col-md-4 form-floating">
-            <select (click)="sumapaso1()" class="form-select" name="p1p1" id="p1p1" formControlName="p1p1">
+            <select (click)="sumapaso1()" (change)="sumapaso1()" class="form-select" name="p1p1" id="p1p1" formControlName="p1p1">
               <option *ngFor="let p1 of p1p1" [value]=p1.valor>{{p1.etiqueta}}</option>
             </select>
             <label for="p1p1">Respuesta</label>
@@ -447,7 +452,7 @@
           <h5>Señale el PLATO (lámina: vaso, plato, revólver, pato): </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)="sumapaso1()" class="form-select" name="p1p2" id="p1p2" formControlName="p1p2">
+          <select (click)="sumapaso1()" (change)="sumapaso1()" class="form-select" name="p1p2" id="p1p2" formControlName="p1p2">
             <option *ngFor="let p2 of p1p1" [value]=p2.valor>{{p2.etiqueta}}</option>
           </select>
           <label for="p1p2">Respuesta</label>
@@ -464,7 +469,7 @@
             <h5>Tóquese la oreja: </h5>
           </div>
           <div class="col-md-4 form-floating">
-            <select (click)="sumapaso1()" class="form-select" name="p1p3" id="p1p3" formControlName="p1p3">
+            <select (click)="sumapaso1()" (change)="sumapaso1()" class="form-select" name="p1p3" id="p1p3" formControlName="p1p3">
               <option *ngFor="let p3 of p1p1" [value]=p3.valor>{{p3.etiqueta}}</option>
             </select>
             <label for="p1p3">Respuesta</label>
@@ -479,7 +484,7 @@
           <h5>Señale el techo y luego mueva su cabeza: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)="sumapaso1()" class="form-select" name="p1p4" id="p1p4" formControlName="p1p4">
+          <select (click)="sumapaso1()" (change)="sumapaso1()" class="form-select" name="p1p4" id="p1p4" formControlName="p1p4">
             <option *ngFor="let p4 of p1p2" [value]=p4.valor>{{p4.etiqueta}}</option>
           </select>
           <label for="p1p4">Respuesta</label>
@@ -493,7 +498,7 @@
           <h5>Señale la puerta, abra la boca y luego cierre los ojos: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)="sumapaso1()" class="form-select" name="p1p5" id="p1p5" formControlName="p1p5">
+          <select (click)="sumapaso1()" (change)="sumapaso1()" class="form-select" name="p1p5" id="p1p5" formControlName="p1p5">
             <option *ngFor="let p5 of p1p3" [value]=p5.valor>{{p5.etiqueta}}</option>
           </select>
           <label for="p1p5">Respuesta</label>
@@ -514,53 +519,7 @@
       <hr class="mt-3" style="height: 2px;border:none; background-color: black; color: black;">
       <!--Observaciones cualitativas-->
       <h6 class="mt-3" style="text-align: left;">Observaciones cualitativas en comprensión auditiva</h6>
-      <div class="mt-3 row" style="background-color: rgb(153, 111, 95,0.1);">
-        <div class="col-md-2">
-          <h5> Emparejamiento: </h5>
-        </div>
-        <div class="col-md-4 form-check">
-          <input class="form-check-input" type="checkbox" value="Errores Formales" id="p1c1o1" name="p1c1o1"
-            formControlName="p1c1o1">
-          <label class="form-check-label" for="p1c1o1">
-            Errores Formales
-          </label>
-        </div>
-        <div class="col-md-3 form-check">
-          <input class="form-check-input" type="checkbox" value="Errores Semanticos" id="p1c1o2" name="p1c1o2"
-            formControlName="p1c1o2">
-          <label class="form-check-label" for="p1c1o2">
-            Errores Semanticos
-          </label>
-        </div>
-        <div class="col-md-3 form-check">
-          <input class="form-check-input" type="checkbox" value="Errores No Relacionados" id="p1c1o3" name="p1c1o3"
-            formControlName="p1c1o3">
-          <label class="form-check-label" for="p1c1o3">
-            Errores No Relacionados
-          </label>
-        </div>
-      </div>
-      <div class="row mt-1 " style="background-color: rgb(153, 111, 95,0.1);">
-        <div class="col-md-2">
-          <h5>Comandos Oidos:</h5>
-        </div>
-        <div class="col-md-4 form-check">
-          <input class="form-check-input" type="checkbox" value="Omision/sustitucion de partes" id="p1c2o1" name="p1c2o1"
-            formControlName="p1c2o1">
-          <label class="form-check-label" for="p1c2o1">
-            Omision/sustitucion de partes
-          </label>
-        </div>
-        <div class="col-md-3 form-check">
-          <input class="form-check-input" type="checkbox" value=" Alteracion del orden" id="p1c2o2" name="p1c2o2"
-            formControlName="p1c2o2">
-          <label class="form-check-label" for="p1c2o2">
-            Alteracion del orden
-          </label>
-        </div>
-        <div class="col-md-3">
-        </div>
-      </div>
+  
       <div class="row">
         <div class="col-md-6">
           <button class="btnForm " (click)="backTemplate()">Anterior</button>
@@ -585,7 +544,7 @@
             <h5>Diga su nombre completo: </h5>
           </div>
           <div class="col-md-4 form-floating">
-            <select (click)="sumapaso2()" class="form-select" name="p2p1" id="p2p1" formControlName="p2p1">
+            <select (click)="sumapaso2()" (change)="sumapaso2()" class="form-select" name="p2p1" id="p2p1" formControlName="p2p1">
               <option *ngFor="let p of p2p1" [value]=p.valor>{{p.etiqueta}}</option>
             </select>
             <label for="p2p1">Respuesta</label>
@@ -599,7 +558,7 @@
             <h5>¿En que ciudad nacio? </h5>
           </div>
           <div class="col-md-4 form-floating">
-            <select (click)="sumapaso2()" class="form-select" name="p2p2" id="p2p2" formControlName="p2p2">
+            <select (click)="sumapaso2()" (change)="sumapaso2()" class="form-select" name="p2p2" id="p2p2" formControlName="p2p2">
               <option *ngFor="let p of p2p1" [value]=p.valor>{{p.etiqueta}}</option>
             </select>
             <label for="p2p2">Respuesta</label>
@@ -613,7 +572,7 @@
             <h5>Diga que ve en la lamina (lamina: "El Parque") </h5>
           </div>
           <div class="col-md-4 form-floating">
-            <select (click)="sumapaso2()" class="form-select" name="p2p3" id="p2p3" formControlName="p2p3">
+            <select (click)="sumapaso2()" (change)="sumapaso2()" class="form-select" name="p2p3" id="p2p3" formControlName="p2p3">
               <option *ngFor="let p of p2p2" [value]=p.valor>{{p.etiqueta}}</option>
             </select>
             <label for="p2p3">Respuesta</label>
@@ -627,7 +586,7 @@
             <h5>Diga que ve en la lamina (lamina: "Consulta Medica") </h5>
           </div>
           <div class="col-md-4 form-floating">
-            <select (click)="sumapaso2()" class="form-select" name="p2p4" id="p2p4" formControlName="p2p4">
+            <select (click)="sumapaso2()" (change)="sumapaso2()" class="form-select" name="p2p4" id="p2p4" formControlName="p2p4">
               <option *ngFor="let p of p2p2" [value]=p.valor>{{p.etiqueta}}</option>
             </select>
             <label for="p2p4">Respuesta</label>
@@ -648,147 +607,8 @@
         <!--Observaciones cualitativas en expresion oral -->
         <hr class="mt-3" style="height: 2px;border:none; background-color: black; color: black;">
         <h6 class="mt-3" style="text-align: left;">Observaciones cualitativas en expresion oral</h6>
-        <div class="row mt-1 " style="background-color: rgb(153, 111, 95,0.1);">
-          <div class="col-md-3">
-            <h5>Fluencia (palabra/tiempo):</h5>
-          </div>
-          <div class="col-md-3  ">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="p2c1o1" name="p2c1o1" formControlName="p2c1o1">
-              <label class="form-check-label" for="p2c1o1">
-                Normal
-              </label>
-            </div>
-          </div>
-          <div class="col-md-3 ">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="p2c1o2" name="p2c1o2" formControlName="p2c1o2">
-              <label class="form-check-label" for="p2c1o2">
-                Aumentada (logorrea)
-              </label>
-            </div>
-          </div>
-          <div class="col-md-3 ">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="p2c1o3" name="p2c1o3" formControlName="p2c1o3">
-              <label class="form-check-label" for="p2c1o3">
-                Disminuida (no fluente)
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="row mt-1 " style="background-color: rgb(153, 111, 95,0.1);">
-          <div class="col-md-3 ">
-            <h5>Articulacion:</h5>
-          </div>
-          <div class="col-md-3 ">
-            <div class="form-check">
-              <input type="radio" class="form-check-input" value="Normal" id="p2c2o1" name="p2c2o1"
-                formControlName="p2c2o1">
-              <label class="form-check-label" for="p2c2o1">Normal
-              </label>
-            </div>
-            <div class="form-check">
-              <input type="radio" class="form-check-input" value="Alterado" id="p2c2o2" name="p2c2o1"
-                formControlName="p2c2o1">
-              <label class="form-check-label" for="p2c2o2">Alterada
-              </label>
-            </div>
-          </div>
-          <div class="col-md-3 ">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="p2c2o2c1" name="p2c2o2c1"
-                formControlName="p2c2o2c1">
-              <label class="form-check-label" for="p2c2o2c1">
-                Disprosodia
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="p2c2o2c2" name="p2c2o2c2"
-                formControlName="p2c2o2c2">
-              <label class="form-check-label" for="p2c2o2c2">
-                Anomia
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="p2c2o2c3" name="p2c2o2c3"
-                formControlName="p2c2o2c3">
-              <label class="form-check-label" for="p2c2o2c3">
-                Expresiones Sustitutivas
-              </label>
-            </div>
-          </div>
-          <div class="col-md-3 ">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="p2c2o2c4" name="p2c2o2c4"
-                formControlName="p2c2o2c4">
-              <label class="form-check-label" for="p2c2o2c4">
-                Muletillas
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="p2c2o2c5" name="p2c2o2c5"
-                formControlName="p2c2o2c5">
-              <label class="form-check-label" for="p2c2o2c5">
-                Neologismos
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="p2c2o2c6" name="p2c2o2c6"
-                formControlName="p2c2o2c6">
-              <label class="form-check-label" for="p2c2o2c6">
-                Estereotipias
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="row mt-1 " style="background-color: rgb(153, 111, 95,0.1);">
-          <div class="col-md-3">
-            <h5>Parafasias:</h5>
-          </div>
-          <div class="col-md-3">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="p2c3o1" name="p2c3o1" formControlName="p2c3o1">
-              <label class="form-check-label" for="p2c3o1">
-                Formales
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="p2c3o2" name="p2c3o2" formControlName="p2c3o2">
-              <label class="form-check-label" for="p2c3o2">
-                Morfologicas
-              </label>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="p2c3o3" name="p2c3o3" formControlName="p2c3o3">
-              <label class="form-check-label" for="p2c3o3">
-                Semanticas
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="p2c3o4" name="p2c3o4" formControlName="p2c3o4">
-              <label class="form-check-label" for="p2c3o4">
-                Latencias
-              </label>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="p2c3o5" name="p2c3o5" formControlName="p2c3o5">
-              <label class="form-check-label" for="p2c3o5">
-                Circunloquios
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="p2c3o6" name="p2c3o6" formControlName="p2c3o6">
-              <label class="form-check-label" for="p2c3o6">
-                Perseveraciones
-              </label>
-            </div>
-          </div>
-        </div>
+      
+    
         <div class="row">
           <div class="col-md-6">
             <button class="btnForm" (click)="backTemplate()">Anterior</button>
@@ -817,7 +637,7 @@
           <h5>Sol: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)="sumapaso3()" class="form-select" name="p3p1" id="p3p1" formControlName="p3p1">
+          <select (click)="sumapaso3()" (change)="sumapaso3()" class="form-select" name="p3p1" id="p3p1" formControlName="p3p1">
             <option *ngFor="let p of p3p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p3p1">Respuesta</label>
@@ -831,7 +651,7 @@
           <h5>Precio: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)="sumapaso3()" class="form-select" name="p3p2" id="p3p2" formControlName="p3p2">
+          <select (click)="sumapaso3()" (change)="sumapaso3()" class="form-select" name="p3p2" id="p3p2" formControlName="p3p2">
             <option *ngFor="let p of p3p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p3p2">Respuesta</label>
@@ -845,7 +665,7 @@
           <h5>Pensamiento: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)="sumapaso3()" class="form-select" name="p3p3" id="p3p3" formControlName="p3p3">
+          <select (click)="sumapaso3()" (change)="sumapaso3()" class="form-select" name="p3p3" id="p3p3" formControlName="p3p3">
             <option *ngFor="let p of p3p2" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p3p3">Respuesta</label>
@@ -862,7 +682,7 @@
           <h5>Mucho Ruido: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)="sumapaso3()" class="form-select" name="p3p4" id="p3p4" formControlName="p3p4">
+          <select (click)="sumapaso3()" (change)="sumapaso3()" class="form-select" name="p3p4" id="p3p4" formControlName="p3p4">
             <option *ngFor="let p of p3p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p3p4">Respuesta</label>
@@ -876,7 +696,7 @@
           <h5>El Hombre guardo las herramientas: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)="sumapaso3()" class="form-select" name="p3p5" id="p3p5" formControlName="p3p5">
+          <select (click)="sumapaso3()" (change)="sumapaso3()" class="form-select" name="p3p5" id="p3p5" formControlName="p3p5">
             <option *ngFor="let p of p3p3" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p3p5">Respuesta</label>
@@ -890,7 +710,7 @@
           <h5>La Mujer le regalo un libro a su Hijo: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)="sumapaso3()" class="form-select" name="p3p6" id="p3p6" formControlName="p3p6">
+          <select (click)="sumapaso3()" (change)="sumapaso3()" class="form-select" name="p3p6" id="p3p6" formControlName="p3p6">
             <option *ngFor="let p of p3p4" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p3p3">Respuesta</label>
@@ -907,7 +727,7 @@
           <h5>Fo: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)="sumapaso3()" class="form-select" name="p3p7" id="p3p7" formControlName="p3p7">
+          <select (click)="sumapaso3()" (change)="sumapaso3()" class="form-select" name="p3p7" id="p3p7" formControlName="p3p7">
             <option *ngFor="let p of p3p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p3p7">Respuesta</label>
@@ -921,7 +741,7 @@
           <h5>Treyo: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)="sumapaso3()" class="form-select" name="p3p8" id="p3p8" formControlName="p3p8">
+          <select (click)="sumapaso3()" (change)="sumapaso3()" class="form-select" name="p3p8" id="p3p8" formControlName="p3p8">
             <option *ngFor="let p of p3p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p3p8">Respuesta</label>
@@ -935,7 +755,7 @@
           <h5>Almusipa: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)="sumapaso3()" class="form-select" name="p3p9" id="p3p9" formControlName="p3p9">
+          <select (click)="sumapaso3()" (change)="sumapaso3()" class="form-select" name="p3p9" id="p3p9" formControlName="p3p9">
             <option *ngFor="let p of p3p2" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p3p9">Respuesta</label>
@@ -980,7 +800,7 @@
           <h5>¿Qué es esto? (Lámina “cama”): </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)="sumapaso4()" class="form-select" name="p4p1" id="p4p1" formControlName="p4p1">
+          <select (click)="sumapaso4()" (change)="sumapaso4()" class="form-select" name="p4p1" id="p4p1" formControlName="p4p1">
             <option *ngFor="let p of p4p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p4p1">Respuesta</label>
@@ -994,7 +814,7 @@
           <h5>¿Qué es esto? (Lámina “violín”): </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)="sumapaso4()" class="form-select" name="p4p2" id="p4p2" formControlName="p4p2">
+          <select (click)="sumapaso4()" (change)="sumapaso4()" class="form-select" name="p4p2" id="p4p2" formControlName="p4p2">
             <option *ngFor="let p of p4p2" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p4p2">Respuesta</label>
@@ -1008,7 +828,7 @@
           <h5>¿Qué hace esta persona? (Lámina “come”): </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)="sumapaso4()" class="form-select" name="p4p3" id="p4p3" formControlName="p4p3">
+          <select (click)="sumapaso4()" (change)="sumapaso4()" class="form-select" name="p4p3" id="p4p3" formControlName="p4p3">
             <option *ngFor="let p of p4p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p4p3">Respuesta</label>
@@ -1022,7 +842,7 @@
           <h5>¿Qué hace esta persona? (Lámina “rema”): </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)="sumapaso4()" class="form-select" name="p4p4" id="p4p4" formControlName="p4p4">
+          <select (click)="sumapaso4()" (change)="sumapaso4()" class="form-select" name="p4p4" id="p4p4" formControlName="p4p4">
             <option *ngFor="let p of p4p2" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p4p4">Respuesta</label>
@@ -1073,7 +893,7 @@
           <h5>Mono (lámina: reloj, mono, león, moño): </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)='sumapaso5()' class="form-select" name="p5p1" id="p5p1" formControlName="p5p1">
+          <select (click)='sumapaso5()' (change)="sumapaso5()" class="form-select" name="p5p1" id="p5p1" formControlName="p5p1">
             <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p5p1">Respuesta</label>
@@ -1087,7 +907,7 @@
           <h5>Arco (lámina: martillo, flecha, arco, barco): </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)='sumapaso5()' class="form-select" name="p5p2" id="p5p2" formControlName="p5p2">
+          <select (click)='sumapaso5()' (change)="sumapaso5()" class="form-select" name="p5p2" id="p5p2" formControlName="p5p2">
             <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p5p2">Respuesta</label>
@@ -1104,7 +924,7 @@
           <h5>Casa: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)='sumapaso5()' class="form-select" name="p5p3" id="p5p3" formControlName="p5p3">
+          <select (click)='sumapaso5()' (change)="sumapaso5()" class="form-select" name="p5p3" id="p5p3" formControlName="p5p3">
             <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p5p3">Respuesta</label>
@@ -1118,7 +938,7 @@
           <h5>Grito: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)='sumapaso5()' class="form-select" name="p5p4" id="p5p4" formControlName="p5p4">
+          <select (click)='sumapaso5()' (change)="sumapaso5()" class="form-select" name="p5p4" id="p5p4" formControlName="p5p4">
             <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p5p4">Respuesta</label>
@@ -1132,7 +952,7 @@
           <h5>Estatua: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)='sumapaso5()' class="form-select" name="p5p5" id="p5p5" formControlName="p5p5">
+          <select (click)='sumapaso5()' (change)="sumapaso5()" class="form-select" name="p5p5" id="p5p5" formControlName="p5p5">
             <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p5p5">Respuesta</label>
@@ -1146,7 +966,7 @@
           <h5>Comunidad: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)='sumapaso5()' class="form-select" name="p5p6" id="p5p6" formControlName="p5p6">
+          <select (click)='sumapaso5()' (change)="sumapaso5()" class="form-select" name="p5p6" id="p5p6" formControlName="p5p6">
             <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p5p6">Respuesta</label>
@@ -1163,7 +983,7 @@
           <h5>Ne: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)='sumapaso5()' class="form-select" name="p5p7" id="p5p7" formControlName="p5p7">
+          <select (click)='sumapaso5()' (change)="sumapaso5()" class="form-select" name="p5p7" id="p5p7" formControlName="p5p7">
             <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p5p7">Respuesta</label>
@@ -1177,7 +997,7 @@
           <h5>Cho: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)='sumapaso5()' class="form-select" name="p5p8" id="p5p8" formControlName="p5p8">
+          <select (click)='sumapaso5()' (change)="sumapaso5()" class="form-select" name="p5p8" id="p5p8" formControlName="p5p8">
             <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p5p8">Respuesta</label>
@@ -1191,7 +1011,7 @@
           <h5>Bleja: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)='sumapaso5()' class="form-select" name="p5p9" id="p5p9" formControlName="p5p9">
+          <select (click)='sumapaso5()' (change)="sumapaso5()" class="form-select" name="p5p9" id="p5p9" formControlName="p5p9">
             <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p5p9">Respuesta</label>
@@ -1205,7 +1025,7 @@
           <h5>Tudipro: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)='sumapaso5()' class="form-select" name="p5p10" id="p5p10" formControlName="p5p10">
+          <select (click)='sumapaso5()' (change)="sumapaso5()" class="form-select" name="p5p10" id="p5p10" formControlName="p5p10">
             <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p5p10">Respuesta</label>
@@ -1222,7 +1042,7 @@
           <h5>Saque la lengua y salude con la mano: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)='sumapaso5()' class="form-select" name="p5p11" id="p5p11" formControlName="p5p11">
+          <select (click)='sumapaso5()' (change)="sumapaso5()" class="form-select" name="p5p11" id="p5p11" formControlName="p5p11">
             <option *ngFor="let p of p5p2" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p5p11">Respuesta</label>
@@ -1271,7 +1091,7 @@
           <h5>Escriba la letra EME: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)=" sumapaso6()" class="form-select" name="p6p1" id="p6p1" formControlName="p6p1">
+          <select (click)=" sumapaso6()" (change)="sumapaso6()" class="form-select" name="p6p1" id="p6p1" formControlName="p6p1">
             <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p6p1">Respuesta</label>
@@ -1285,7 +1105,7 @@
           <h5>Escriba la letra ZETA: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)=" sumapaso6()" class="form-select" name="p6p2" id="p6p2" formControlName="p6p2">
+          <select (click)=" sumapaso6()" (change)="sumapaso6()" class="form-select" name="p6p2" id="p6p2" formControlName="p6p2">
             <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p6p2">Respuesta</label>
@@ -1301,7 +1121,7 @@
           <h5>Mano: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)=" sumapaso6()" class="form-select" name="p6p3" id="p6p3" formControlName="p6p3">
+          <select (click)=" sumapaso6()" (change)="sumapaso6()" class="form-select" name="p6p3" id="p6p3" formControlName="p6p3">
             <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p6p3">Respuesta</label>
@@ -1315,7 +1135,7 @@
           <h5>Gente: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)=" sumapaso6()" class="form-select" name="p6p4" id="p6p4" formControlName="p6p4">
+          <select (click)=" sumapaso6()" (change)="sumapaso6()" class="form-select" name="p6p4" id="p6p4" formControlName="p6p4">
             <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p6p4">Respuesta</label>
@@ -1329,7 +1149,7 @@
           <h5>Esperanza: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)=" sumapaso6()" class="form-select" name="p6p5" id="p6p5" formControlName="p6p5">
+          <select (click)=" sumapaso6()" (change)="sumapaso6()" class="form-select" name="p6p5" id="p6p5" formControlName="p6p5">
             <option *ngFor="let p of p5p2" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p6p5">Respuesta</label>
@@ -1343,7 +1163,7 @@
           <h5>Aclaración: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)=" sumapaso6()" class="form-select" name="p6p6" id="p6p6" formControlName="p6p6">
+          <select (click)=" sumapaso6()" (change)="sumapaso6()" class="form-select" name="p6p6" id="p6p6" formControlName="p6p6">
             <option *ngFor="let p of p5p2" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p6p6">Respuesta</label>
@@ -1359,7 +1179,7 @@
           <h5>Jo: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)=" sumapaso6()" class="form-select" name="p6p7" id="p6p7" formControlName="p6p7">
+          <select (click)=" sumapaso6()" (change)="sumapaso6()" class="form-select" name="p6p7" id="p6p7" formControlName="p6p7">
             <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p6p7">Respuesta</label>
@@ -1373,7 +1193,7 @@
           <h5>Guela: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)=" sumapaso6()" class="form-select" name="p6p8" id="p6p8" formControlName="p6p8">
+          <select (click)=" sumapaso6()" (change)="sumapaso6()" class="form-select" name="p6p8" id="p6p8" formControlName="p6p8">
             <option *ngFor="let p of p5p1" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p6p8">Respuesta</label>
@@ -1387,7 +1207,7 @@
           <h5>Dirchole: </h5>
         </div>
         <div class="col-md-4 form-floating">
-          <select (click)=" sumapaso6()" class="form-select" name="p6p9" id="p6p9" formControlName="p6p9">
+          <select (click)=" sumapaso6()" (change)="sumapaso6()" class="form-select" name="p6p9" id="p6p9" formControlName="p6p9">
             <option *ngFor="let p of p5p2" [value]=p.valor>{{p.etiqueta}}</option>
           </select>
           <label for="p6p9">Respuesta</label>
@@ -1408,25 +1228,7 @@
       <!--  Observaciones cualitativasen en la Escritura   -->
       <hr class="mt-3">
       <h6 class="mt-3" style="text-align: left;">Observaciones cualitativas en la Escritura</h6>
-      <div class="subcontent">
-        <div>
-          <h5 style="top:0 ;"> Selecciones sus obsercaciones:</h5>
-        </div>
-        <div>
-          <div class="inLine50">
-            <label>
-              <input type="checkbox" class="inputCheckbox"> No escribe por plejía/paresia de la mano dominante
-            </label>
-          </div>
-          <div class="inLine50">
-            <label>
-              <input type="checkbox" class="inputCheckbox"> Utiliza mano no dominante
-            </label>
-          </div>
-          <div class="inLine30">
-          </div>
-        </div>
-      </div>
+  
       <div class="inLine500">
         <button class="btnForm" (click)="backTemplate()">Anterior</button>
       </div>
@@ -1441,7 +1243,7 @@
                  Template 9 - Resumen de puntaje
     *****************************************************
      -->
-    <div class="contentContainer " style="background-color: rgb(111, 104, 204);" *ngIf="template==8">
+     <div class="contentContainer " style="background-color: rgb(111, 104, 204);" *ngIf="template==8">
   
       <h2>Evaluacion del Lenguaje - Resultado</h2>
       <hr class="mt-3">
@@ -1460,32 +1262,32 @@
               <tr>
                 <th style="padding: 4px;" scope="row">Comprensión auditiva</th>
                 <td style="padding: 4px;">{{tp1}}/6</td>
-                <td style="padding: 4px;">Alteración leve</td>
+                <td style="padding: 4px;">{{nivelca}}</td>
               </tr>
               <tr>
                 <th style="padding: 4px;" scope="row">Expresión oral:</th>
                 <td style="padding: 4px;">{{tp2}}/6</td>
-                <td style="padding: 4px;">Alteración moderada</td>
+                <td style="padding: 4px;">{{niveleo}}</td>
               </tr>
               <tr>
                 <th style="padding: 4px;" scope="row">Repetición: </th>
                 <td style="padding: 4px;">{{tp3}}/6</td>
-                <td style="padding: 4px;">Alteración moderada</td>
+                <td style="padding: 4px;">{{nivelr}}</td>
               </tr>
               <tr>
                 <th style="padding: 4px;" scope="row">Denominación: </th>
                 <td style="padding: 4px;">{{tp4}}/6</td>
-                <td style="padding: 4px;">Alteración moderada</td>
+                <td style="padding: 4px;">{{niveld}}</td>
               </tr>
               <tr>
                 <th style="padding: 4px;" scope="row">Lectura: </th>
                 <td style="padding: 4px;">{{tp5}}/6</td>
-                <td style="padding: 4px;">Alteración moderada</td>
+                <td style="padding: 4px;">{{nivell}}</td>
               </tr>
               <tr>
                 <th style="padding: 4px;" scope="row">Escritura:</th>
                 <td style="padding: 4px;">{{tp6}}/6</td>
-                <td style="padding: 4px;">Alteración leve</td>
+                <td style="padding: 4px;">{{nivele}}</td>
               </tr>
               <tr>
                 <th style="padding: 4px;" scope="row">Total</th>
@@ -1512,16 +1314,23 @@
         <div class="col-md-1"></div>
       </div>
       <div class="inLine500">
+        
         <button class="btnForm" (click)="backTemplate()">Anterior</button>
       </div>
       <div class="inLine500" style="text-align: right;">
-        <button class="btnForm" (click)="nextTemplate()">Siguiente</button>
+        <div *ngIf="!enviado">
+        <button class="btnForm" (click)="finalizarProtocolo()">Finalizar Protocolo</button>
       </div>
-    </div>
+      <div *ngIf="enviado">
+        <button class="btnForm" (click)="verProtocolo()">Ver Protocolo</button>
+      </div>
+      </div>
+    </div> 
   
-    <pre>
-        {{template}}
-          {{forma.value|json}}
-        {{forma.valid}}
-        {{mispacientes[2]|json}}
-        </pre>
+  </form>
+  <pre>
+  {{template}}
+    {{forma.value|json}}
+  {{forma.valid}}
+  {{sintomasneurologicos|json}}
+  </pre>

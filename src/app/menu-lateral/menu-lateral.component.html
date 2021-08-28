@@ -54,7 +54,7 @@
       </span>
       <div class="text-center">
         <input type="text" placeholder="Usuario" name="usuario" [(ngModel)]="usuariologin.Mail">
-        <input type="password" placeholder="Contraseña" name="password" [(ngModel)]="usuariologin.PasswordCuenta">
+        <input type="password" (keyup.enter)="login()" placeholder="Contraseña" name="password" [(ngModel)]="usuariologin.PasswordCuenta">
       </div>
       <ul>
         <li>

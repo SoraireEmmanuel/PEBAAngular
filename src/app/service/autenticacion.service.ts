@@ -1,4 +1,4 @@
-import { HttpClientModule , HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Profesional } from '../Class/Profesional';
@@ -11,27 +11,32 @@ import { idProfesional } from '../Class/IdProfesional';
   providedIn: 'root'
 })
 export class AutenticacionService {
- private url = 'https://apipeba.azurewebsites.net/api/'
-  constructor(private http:HttpClient) {}
+  private url = 'https://apipeba.azurewebsites.net/api/'
+  private token: any;
+  constructor(private http: HttpClient) { }
 
 
-login( usuario:UsuarioLogin):Observable<any>{
-  var resp = this.http.post(`${this.url}Account`, usuario);
-  return resp;
-}
-idUsuario(usuario:UsuarioLogin):Observable<any>{
-  return this.http.post(`${this.url}idLogin`,usuario);
-}
-logout(){
+  login(usuario: UsuarioLogin): Observable<any> {
+    var resp: any = this.http.post(`${this.url}Account`, usuario);
+    this.token = resp;
+    return resp;
+  }
+  idUsuario(usuario: UsuarioLogin): Observable<any> {
+    return this.http.post(`${this.url}idLogin`, usuario);
+  }
+  logout() {
+    this.token = null;
+    localStorage.removeItem('token');
+    localStorage.removeItem('idusuario');
+  }
+  nuevoUsuario(profesional: Profesional): Observable<any> {
 
-  
-}
-nuevoUsuario( profesional:Profesional):Observable<any>{
+    return this.http.post(
+      `${this.url}Profesionales`, profesional
+    )
+  }
+  estaAutenticado(): boolean {
+    return localStorage.getItem('token') != null;
+  }
 
-  return this.http.post(
-    `${this.url}Profesionales`,profesional
-  )
- 
-}
-   
 }
